@@ -1,143 +1,184 @@
 package com.capgemini.to;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashSet;
+import org.springframework.util.CollectionUtils;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class EmployeeTO {
 
-import com.capgemini.listeners.CreateEntityListener;
-import com.capgemini.listeners.UpdateEntityListener;
-
-
-public class EmployeeTO  {
-
-	private static final long serialVersionUID = 4877970461361752711L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "office")
 	private OfficeTO office;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="employee_position")
 	private EmployeePositionTO employeePosition;
-
-	@Column(nullable = false, length = 20)
 	private String firstName;
-
-	@Column(nullable = false, length = 30)
 	private String lastName;
-
-	@Column(nullable = false)
 	private Timestamp birthDate;
-
-	@ManyToMany(mappedBy = "employee")
-	private Collection<CarTO> cars ;
-
+	private Collection<CarTO> cars;
 
 	public EmployeeTO() {
+		super();
 	}
 
+	public EmployeeTO(OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
+			Timestamp birthDate, Collection<CarTO> cars) {
+		super();
+		this.office = office;
+		this.employeePosition = employeePosition;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.cars = cars;
+	}
+
+	public EmployeeTO(OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
+			Timestamp birthDate, Collection<CarTO> cars, Long id) {
+		super();
+		this.office = office;
+		this.employeePosition = employeePosition;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.cars = cars;
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public OfficeTO getOffice() {
 		return office;
 	}
 
-
 	public void setOffice(OfficeTO office) {
 		this.office = office;
 	}
-
 
 	public EmployeePositionTO getEmployeePosition() {
 		return employeePosition;
 	}
 
-
 	public void setEmployeePosition(EmployeePositionTO employeePosition) {
 		this.employeePosition = employeePosition;
 	}
-
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 
 	public String getLastName() {
 		return lastName;
 	}
 
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 
 	public Timestamp getBirthDate() {
 		return birthDate;
 	}
 
-
 	public void setBirthDate(Timestamp birthDate) {
 		this.birthDate = birthDate;
 	}
-
 
 	public Collection<CarTO> getCars() {
 		return cars;
 	}
 
-
 	public void setCars(Collection<CarTO> cars) {
 		this.cars = cars;
 	}
 
+	public static EmployeeTOBuilder builder() {
+		return new EmployeeTOBuilder();
+	}
+
+	public static class EmployeeTOBuilder {
+		private Long id;
+		private OfficeTO office;
+		private EmployeePositionTO employeePosition;
+		private String firstName;
+		private String lastName;
+		private Timestamp birthDate;
+		private Collection<CarTO> cars = new HashSet<>();
+
+		public EmployeeTOBuilder() {
+			super();
+		}
+
+		public EmployeeTOBuilder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public EmployeeTOBuilder withOffice(OfficeTO office) {
+			this.office = office;
+			return this;
+		}
+
+		public EmployeeTOBuilder withEmployeePosition(EmployeePositionTO employeePosition) {
+			this.employeePosition = employeePosition;
+			return this;
+		}
+
+		public EmployeeTOBuilder withFirstName(String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+
+		public EmployeeTOBuilder withLastName(String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+
+		public EmployeeTOBuilder withBirthDate(Timestamp birthDate) {
+			this.birthDate = birthDate;
+			return this;
+		}
+
+		public EmployeeTOBuilder withCar(CarTO car) {
+			this.cars.add(car);
+			return this;
+		}
+
+		public EmployeeTOBuilder withCars(Collection<CarTO> carsToBeAdded) {
+			this.cars.addAll(carsToBeAdded);
+			return this;
+		}
+
+		public EmployeeTO build() {
+			checkBeforeBuild(office, employeePosition, firstName, lastName, birthDate, cars);
+			return new EmployeeTO(office, employeePosition, firstName, lastName, birthDate, cars, id);
+		}
+
+		private void checkBeforeBuild(OfficeTO office, EmployeePositionTO employeePosition, String firstName,
+				String lastName, Timestamp birthDate, Collection<CarTO> cars) {
+			if (office == null || employeePosition == null || firstName == null || firstName.isEmpty()
+					|| lastName == null || lastName.isEmpty() || birthDate == null || CollectionUtils.isEmpty(cars)) {
+				throw new RuntimeException("Incorrect employee to be created");
+			}
+		}
+	}
 
 	@Override
 	public String toString() {
-		return "EmployeeEntity [id=" + id + ", office=" + office + ", employeePosition=" + employeePosition
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", birthDate=" + birthDate + ", cars=" + cars
-				+ "]";
+		return "EmployeeTO [id=" + id + ", office=" + office + ", employeePosition=" + employeePosition + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", birthDate=" + birthDate + ", cars=" + cars + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
 		result = prime * result + ((cars == null) ? 0 : cars.hashCode());
 		result = prime * result + ((employeePosition == null) ? 0 : employeePosition.hashCode());
@@ -148,12 +189,11 @@ public class EmployeeTO  {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -195,5 +235,5 @@ public class EmployeeTO  {
 			return false;
 		return true;
 	}
-	
+
 }

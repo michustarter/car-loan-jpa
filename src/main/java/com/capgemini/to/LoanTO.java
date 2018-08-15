@@ -1,67 +1,45 @@
 package com.capgemini.to;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+public class LoanTO {
 
-import com.capgemini.listeners.CreateEntityListener;
-import com.capgemini.listeners.UpdateEntityListener;
-
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
-@Table(name = "loan")
-public class LoanTO extends AbstractEntity implements Serializable {
-
-	private static final long serialVersionUID = -6540895967742828596L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id")
 	private CustomerTO customer;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "car")
 	private CarTO car;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "office_from")
 	private OfficeTO officeFrom;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "office_to")
 	private OfficeTO officeTo;
-
-	@Column(nullable = false)
 	private Timestamp rentalDate;
-
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
 	private Timestamp returnDate;
-
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
 	private int loanPrice;
 
 	public LoanTO() {
+		super();
+	}
+
+	public LoanTO(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
+			Timestamp returnDate, int loanPrice) {
+		super();
+		this.customer = customer;
+		this.car = car;
+		this.officeFrom = officeFrom;
+		this.officeTo = officeTo;
+		this.rentalDate = rentalDate;
+		this.returnDate = returnDate;
+		this.loanPrice = loanPrice;
+	}
+
+	public LoanTO(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
+			Timestamp returnDate, int loanPrice, Long id) {
+		super();
+		this.customer = customer;
+		this.car = car;
+		this.officeFrom = officeFrom;
+		this.officeTo = officeTo;
+		this.rentalDate = rentalDate;
+		this.returnDate = returnDate;
+		this.loanPrice = loanPrice;
+		this.id = id;
 	}
 
 	public Long getId() {
@@ -128,76 +106,76 @@ public class LoanTO extends AbstractEntity implements Serializable {
 		this.loanPrice = loanPrice;
 	}
 
-	@Override
-	public String toString() {
-		return "LoanEntity [id=" + id + ", customer=" + customer + ", car=" + car + ", officeFrom=" + officeFrom
-				+ ", officeTo=" + officeTo + ", rentalDate=" + rentalDate + ", returnDate=" + returnDate
-				+ ", loanPrice=" + loanPrice + "]";
+	public static LoanTOBuilder builder() {
+		return new LoanTOBuilder();
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((car == null) ? 0 : car.hashCode());
-		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + loanPrice;
-		result = prime * result + ((officeFrom == null) ? 0 : officeFrom.hashCode());
-		result = prime * result + ((officeTo == null) ? 0 : officeTo.hashCode());
-		result = prime * result + ((rentalDate == null) ? 0 : rentalDate.hashCode());
-		result = prime * result + ((returnDate == null) ? 0 : returnDate.hashCode());
-		return result;
-	}
+	public static class LoanTOBuilder {
+		private Long id;
+		private CustomerTO customer;
+		private CarTO car;
+		private OfficeTO officeFrom;
+		private OfficeTO officeTo;
+		private Timestamp rentalDate;
+		private Timestamp returnDate;
+		private int loanPrice;
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		LoanTO other = (LoanTO) obj;
-		if (car == null) {
-			if (other.car != null)
-				return false;
-		} else if (!car.equals(other.car))
-			return false;
-		if (customer == null) {
-			if (other.customer != null)
-				return false;
-		} else if (!customer.equals(other.customer))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (loanPrice != other.loanPrice)
-			return false;
-		if (officeFrom == null) {
-			if (other.officeFrom != null)
-				return false;
-		} else if (!officeFrom.equals(other.officeFrom))
-			return false;
-		if (officeTo == null) {
-			if (other.officeTo != null)
-				return false;
-		} else if (!officeTo.equals(other.officeTo))
-			return false;
-		if (rentalDate == null) {
-			if (other.rentalDate != null)
-				return false;
-		} else if (!rentalDate.equals(other.rentalDate))
-			return false;
-		if (returnDate == null) {
-			if (other.returnDate != null)
-				return false;
-		} else if (!returnDate.equals(other.returnDate))
-			return false;
-		return true;
+		public LoanTOBuilder() {
+			super();
+		}
+
+		public LoanTOBuilder withId(Long id) {
+			this.id = id;
+			return this;
+		}
+
+		public LoanTOBuilder withCustomer(CustomerTO customer) {
+			this.customer = customer;
+			return this;
+		}
+
+		public LoanTOBuilder withCar(CarTO car) {
+			this.car = car;
+			return this;
+		}
+
+		public LoanTOBuilder withOfficeFrom(OfficeTO officeFrom) {
+			this.officeFrom = officeFrom;
+			return this;
+		}
+
+		public LoanTOBuilder withOfficeTo(OfficeTO officeTo) {
+			this.officeTo = officeTo;
+			return this;
+		}
+
+		public LoanTOBuilder withRentalDate(Timestamp rentalDate) {
+			this.rentalDate = rentalDate;
+			return this;
+		}
+
+		public LoanTOBuilder withReturnDate(Timestamp returnDate) {
+			this.returnDate = returnDate;
+			return this;
+		}
+
+		public LoanTOBuilder withLoanPrice(int loanPrice) {
+			this.loanPrice = loanPrice;
+			return this;
+		}
+
+		public LoanTO build() {
+			checkBeforeBuild(customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice);
+			return new LoanTO(customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice, id);
+		}
+
+		private void checkBeforeBuild(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo,
+				Timestamp rentalDate, Timestamp returnDate, int loanPrice) {
+			if (customer == null || car == null || officeFrom == null || officeTo == null || rentalDate == null
+					|| returnDate == null || rentalDate.after(returnDate) || loanPrice <= 0) {
+				throw new RuntimeException("Incorrect loan to be created");
+			}
+		}
+
 	}
-	
-	
 }

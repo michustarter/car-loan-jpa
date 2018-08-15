@@ -61,7 +61,7 @@ public class EmployeePositionTO {
 		}
 		private void checkBeforeBuild(String position) {
 			if (position == null||position.isEmpty()) {
-				throw new RuntimeException("Incorrect adress to be created");
+				throw new RuntimeException("Incorrect employeePosition to be created");
 			}
 		}
 	}

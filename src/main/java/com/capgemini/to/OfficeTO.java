@@ -99,7 +99,7 @@ public class OfficeTO {
 
 		private void checkBeforeBuild(AddressTO address, String phoneNumber, String mail) {
 			if (address == null || phoneNumber == null || mail == null) {
-				throw new RuntimeException("Incorrect customer to be created");
+				throw new RuntimeException("Incorrect office to be created");
 			}
 		}
 	}
