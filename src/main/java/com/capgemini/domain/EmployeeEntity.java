@@ -2,19 +2,18 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -34,12 +33,12 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "office")
+	@ManyToOne
+	@JoinColumn(name = "office_id")
 	private OfficeEntity office;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="employee_position")
+	@ManyToOne
+	@JoinColumn(name="employee_position_id")
 	private EmployeePositionEntity employeePosition;
 
 	@Column(nullable = false, length = 20)
@@ -51,8 +50,10 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
 	private Timestamp birthDate;
 
-	@ManyToMany(mappedBy = "employee")
-	private Set<CarEntity> cars ;
+	@ManyToMany
+	@JoinTable(name = "keeper", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "car_id") })
+	private List<CarEntity> cars ;
 
 
 	public EmployeeEntity() {
@@ -119,12 +120,12 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	}
 
 
-	public Set<CarEntity> getCars() {
+	public List<CarEntity> getCars() {
 		return cars;
 	}
 
 
-	public void setCars(Set<CarEntity> cars) {
+	public void setCars(List<CarEntity> cars) {
 		this.cars = cars;
 	}
 

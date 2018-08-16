@@ -3,20 +3,8 @@ package com.capgemini.domain;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 
-import com.capgemini.listeners.CreateEntityListener;
-import com.capgemini.listeners.UpdateEntityListener;
-
-@Entity
 @Embeddable
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
-@Table(name = "address")
 public class AddressEntity extends AbstractEntity implements Serializable {
 
 	private static final long serialVersionUID = 1885673201728319134L;

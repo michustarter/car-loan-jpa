@@ -20,8 +20,7 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	//@JoincColumn..?
+	@OneToOne
 	@Embedded
 	@AttributeOverrides(value={
 			@AttributeOverride(name="street", column=@Column(length=30)),

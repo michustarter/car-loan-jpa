@@ -4,53 +4,57 @@ import java.util.List;
 
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import com.capgemini.dao.CarDao;
 import com.capgemini.domain.CarEntity;
 import com.capgemini.domain.EmployeeEntity;
 
-
+@Repository
 public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 
 	@Override
-	public List<CarEntity> findCarsByTypeAndBrand(String type, String brand) {
-		   TypedQuery<CarEntity> query = entityManager.createQuery(
-	                "select car from CarEntity car where car.type = :type and car.brand = :brand", CarEntity.class);
-	        query.setParameter("type", type);
-	        query.setParameter("brand", brand);
-
-	        return query.getResultList();
-	}
-
-	@Override
-	public List<CarEntity> findCarsByKeeper(Long employeeId) {
-		TypedQuery<CarEntity> query=entityManager.createQuery(
-	                "select car from CarEntity car where :employee_id member of car.keepers", CarEntity.class);
-	        query.setParameter("employee_id", employeeId);
-	        return query.getResultList();
-	}
-
-	@Override
 	public CarEntity addNewCar(CarEntity carEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		return save(carEntity);
 	}
 
 	@Override
 	public void deleteCar(Long id) {
-		// TODO Auto-generated method stub
-		
+		delete(id);
 	}
 
 	@Override
 	public CarEntity updateCarData(CarEntity carEntity) {
-		// TODO Auto-generated method stub
-		return null;
+		return update(carEntity);
 	}
 
 	@Override
 	public void assignToKeeper(CarEntity carEntity, EmployeeEntity employeeEntity) {
-		// TODO Auto-generated method stub
+		TypedQuery<EmployeeEntity> query=entityManager.createQuery(
+				"select ee from EmployeeEntity ee where e.id = :id",EmployeeEntity.class);
+		query.setParameter("id", employeeEntity.getId());
+		EmployeeEntity wantedEmployee = query.getSingleResult();
+		wantedEmployee.getCars().add(carEntity);
 		
+		entityManager.merge(wantedEmployee);
+
+	}
+
+	@Override
+	public List<CarEntity> findCarsByTypeAndBrand(String type, String brand) {
+		TypedQuery<CarEntity> query = entityManager.createQuery(
+				"select car from CarEntity car where car.type = :type and car.brand = :brand", CarEntity.class);
+		query.setParameter("type", type);
+		query.setParameter("brand", brand);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<CarEntity> findCarsByKeeper(Long employeeId) {
+		TypedQuery<CarEntity> query = entityManager.createQuery(
+				"select car from CarEntity car where :employee_id member of car.keepers", CarEntity.class);
+		query.setParameter("employee_id", employeeId);
+		return query.getResultList();
 	}
 
 }

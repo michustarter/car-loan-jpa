@@ -1,8 +1,8 @@
 package com.capgemini.to;
 
 import java.time.Year;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.util.CollectionUtils;
 
@@ -17,14 +17,14 @@ public class CarTO {
 	private int engineCapacity;
 	private int power;
 	private int mileage;
-	private Set<EmployeeTO> keepers;
+	private List<EmployeeTO> keepers;
 
 	public CarTO() {
 		super();
 	}
 
 	public CarTO(String type, String brand, String model, Year productionYear, String color, int engineCapacity,
-			int power, int mileage, Set<EmployeeTO> keepers) {
+			int power, int mileage, List<EmployeeTO> keepers) {
 		super();
 		this.type = type;
 		this.brand = brand;
@@ -38,7 +38,7 @@ public class CarTO {
 	}
 
 	public CarTO(String type, String brand, String model, Year productionYear, String color, int engineCapacity,
-			int power, int mileage, Set<EmployeeTO> keepers, Long id) {
+			int power, int mileage, List<EmployeeTO> keepers, Long id) {
 		super();
 		this.type = type;
 		this.brand = brand;
@@ -124,11 +124,11 @@ public class CarTO {
 		this.mileage = mileage;
 	}
 
-	public Set<EmployeeTO> getKeepers() {
+	public List<EmployeeTO> getKeepers() {
 		return keepers;
 	}
 
-	public void setKeepers(Set<EmployeeTO> keepers) {
+	public void setKeepers(List<EmployeeTO> keepers) {
 		this.keepers = keepers;
 	}
 
@@ -146,7 +146,7 @@ public class CarTO {
 		private int engineCapacity;
 		private int power;
 		private int mileage;
-		private Set<EmployeeTO> keepers = new HashSet<>();
+		private List<EmployeeTO> keepers = new ArrayList<>();
 
 		public CarTOBuilder() {
 			super();
@@ -202,7 +202,7 @@ public class CarTO {
 			return this;
 		}
 
-		public CarTOBuilder withKeepers(Set<EmployeeTO> keepersToBeadded) {
+		public CarTOBuilder withKeepers(List<EmployeeTO> keepersToBeadded) {
 			this.keepers.addAll(keepersToBeadded);
 			return this;
 		}
@@ -213,7 +213,7 @@ public class CarTO {
 		}
 
 		private void checkBeforeBuild(String type, String brand, String model, Year productionYear, String color,
-				int engineCapacity, int power, int mileage, Set<EmployeeTO> keepers) {
+				int engineCapacity, int power, int mileage, List<EmployeeTO> keepers) {
 			if (type == null || type.isEmpty() || brand == null || brand.isEmpty() || model == null || model.isEmpty()
 					|| productionYear == null || color == null || color.isEmpty() || engineCapacity <= 0 || power <= 0
 					|| mileage < 0 || CollectionUtils.isEmpty(keepers)) {

@@ -1,8 +1,8 @@
 package com.capgemini.to;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.util.CollectionUtils;
 
@@ -14,14 +14,14 @@ public class EmployeeTO {
 	private String firstName;
 	private String lastName;
 	private Timestamp birthDate;
-	private Set<CarTO> cars;
+	private List<CarTO> cars;
 
 	public EmployeeTO() {
 		super();
 	}
 
 	public EmployeeTO(OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
-			Timestamp birthDate, Set<CarTO> cars) {
+			Timestamp birthDate, List<CarTO> cars) {
 		super();
 		this.office = office;
 		this.employeePosition = employeePosition;
@@ -32,7 +32,7 @@ public class EmployeeTO {
 	}
 
 	public EmployeeTO(OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
-			Timestamp birthDate, Set<CarTO> cars, Long id) {
+			Timestamp birthDate, List<CarTO> cars, Long id) {
 		super();
 		this.office = office;
 		this.employeePosition = employeePosition;
@@ -91,11 +91,11 @@ public class EmployeeTO {
 		this.birthDate = birthDate;
 	}
 
-	public Set<CarTO> getCars() {
+	public List<CarTO> getCars() {
 		return cars;
 	}
 
-	public void setCars(Set<CarTO> cars) {
+	public void setCars(List<CarTO> cars) {
 		this.cars = cars;
 	}
 
@@ -110,7 +110,7 @@ public class EmployeeTO {
 		private String firstName;
 		private String lastName;
 		private Timestamp birthDate;
-		private Set<CarTO> cars = new HashSet<>();
+		private List<CarTO> cars = new ArrayList<>();
 
 		public EmployeeTOBuilder() {
 			super();
@@ -151,7 +151,7 @@ public class EmployeeTO {
 			return this;
 		}
 
-		public EmployeeTOBuilder withCars(Set<CarTO> carsToBeAdded) {
+		public EmployeeTOBuilder withCars(List<CarTO> carsToBeAdded) {
 			this.cars.addAll(carsToBeAdded);
 			return this;
 		}
@@ -162,7 +162,7 @@ public class EmployeeTO {
 		}
 
 		private void checkBeforeBuild(OfficeTO office, EmployeePositionTO employeePosition, String firstName,
-				String lastName, Timestamp birthDate, Set<CarTO> cars) {
+				String lastName, Timestamp birthDate, List<CarTO> cars) {
 			if (office == null || employeePosition == null || firstName == null || firstName.isEmpty()
 					|| lastName == null || lastName.isEmpty() || birthDate == null || CollectionUtils.isEmpty(cars)) {
 				throw new RuntimeException("Incorrect employee to be created");

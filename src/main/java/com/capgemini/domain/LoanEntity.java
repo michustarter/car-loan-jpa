@@ -3,11 +3,9 @@ package com.capgemini.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +14,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.capgemini.listeners.CreateEntityListener;
 import com.capgemini.listeners.UpdateEntityListener;
@@ -34,31 +30,29 @@ public class LoanEntity extends AbstractEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "customer_id")
+	@ManyToOne
+	@JoinColumn(name = "customer", nullable = false)
 	private CustomerEntity customer;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "car")
+	@ManyToOne
+	@JoinColumn(name = "car", nullable = false)
 	private CarEntity car;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "office_from")
+	@ManyToOne
 	private OfficeEntity officeFrom;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "office_to")
+	@ManyToOne
 	private OfficeEntity officeTo;
 
 	@Column(nullable = false)
+	//@Temporal(TemporalType.DATE)
 	private Timestamp rentalDate;
 
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
+	@Column(nullable = true)
+	//@Temporal(TemporalType.DATE)
 	private Timestamp returnDate;
 
 	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
 	private int loanPrice;
 
 	public LoanEntity() {
@@ -198,6 +192,5 @@ public class LoanEntity extends AbstractEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

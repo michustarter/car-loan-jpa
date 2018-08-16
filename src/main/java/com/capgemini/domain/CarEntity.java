@@ -2,18 +2,17 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -56,10 +55,11 @@ public class CarEntity extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
 	private int mileage;
 
-	@ManyToMany
-	@JoinTable(name = "car_keeper", joinColumns = { @JoinColumn(name = "car_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "employee_id") })
-	private Set<EmployeeEntity> keepers;
+	@ManyToMany(mappedBy = "cars", fetch = FetchType.LAZY)
+	private List<EmployeeEntity> keepers;
+
+	public CarEntity() {
+	}
 
 	public Long getId() {
 		return id;
@@ -133,11 +133,11 @@ public class CarEntity extends AbstractEntity implements Serializable {
 		this.mileage = mileage;
 	}
 
-	public Set<EmployeeEntity> getKeepers() {
+	public List<EmployeeEntity> getKeepers() {
 		return keepers;
 	}
 
-	public void setKeepers(Set<EmployeeEntity> keepers) {
+	public void setKeepers(List<EmployeeEntity> keepers) {
 		this.keepers = keepers;
 	}
 
@@ -218,5 +218,4 @@ public class CarEntity extends AbstractEntity implements Serializable {
 		return true;
 	}
 
-	
 }
