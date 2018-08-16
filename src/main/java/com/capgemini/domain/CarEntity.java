@@ -2,7 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,7 +59,7 @@ public class CarEntity extends AbstractEntity implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "car_keeper", joinColumns = { @JoinColumn(name = "car_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "employee_id") })
-	private Collection<EmployeeEntity> keepers;
+	private Set<EmployeeEntity> keepers;
 
 	public Long getId() {
 		return id;
@@ -133,11 +133,11 @@ public class CarEntity extends AbstractEntity implements Serializable {
 		this.mileage = mileage;
 	}
 
-	public Collection<EmployeeEntity> getKeepers() {
+	public Set<EmployeeEntity> getKeepers() {
 		return keepers;
 	}
 
-	public void setKeepers(Collection<EmployeeEntity> keepers) {
+	public void setKeepers(Set<EmployeeEntity> keepers) {
 		this.keepers = keepers;
 	}
 

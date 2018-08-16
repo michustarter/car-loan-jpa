@@ -2,7 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,7 +52,7 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	private Timestamp birthDate;
 
 	@ManyToMany(mappedBy = "employee")
-	private Collection<CarEntity> cars ;
+	private Set<CarEntity> cars ;
 
 
 	public EmployeeEntity() {
@@ -119,12 +119,12 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	}
 
 
-	public Collection<CarEntity> getCars() {
+	public Set<CarEntity> getCars() {
 		return cars;
 	}
 
 
-	public void setCars(Collection<CarEntity> cars) {
+	public void setCars(Set<CarEntity> cars) {
 		this.cars = cars;
 	}
 
