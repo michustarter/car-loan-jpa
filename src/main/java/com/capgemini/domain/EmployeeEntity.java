@@ -2,6 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -53,7 +54,7 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "keeper", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "car_id") })
-	private List<CarEntity> cars ;
+	private List<CarEntity> cars=new ArrayList<>();
 
 
 	public EmployeeEntity() {

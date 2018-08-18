@@ -2,6 +2,7 @@ package com.capgemini.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -17,10 +18,9 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 	public CarEntity addNewCar(CarEntity carEntity) {
 		return save(carEntity);
 	}
-
 	@Override
-	public void deleteCar(Long id) {
-		delete(id);
+	public void deleteCar(Long carId) {
+		delete(carId);
 	}
 
 	@Override
@@ -30,13 +30,16 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 
 	@Override
 	public void assignToKeeper(CarEntity carEntity, EmployeeEntity employeeEntity) {
-		TypedQuery<EmployeeEntity> query=entityManager.createQuery(
-				"select ee from EmployeeEntity ee where e.id = :id",EmployeeEntity.class);
+		TypedQuery<EmployeeEntity> query = entityManager
+				.createQuery("select ee from EmployeeEntity ee where e.id = :id", EmployeeEntity.class);
 		query.setParameter("id", employeeEntity.getId());
+		try{
 		EmployeeEntity wantedEmployee = query.getSingleResult();
 		wantedEmployee.getCars().add(carEntity);
-		
 		entityManager.merge(wantedEmployee);
+		} catch (NoResultException e) {
+			
+		}
 
 	}
 
@@ -50,10 +53,10 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 	}
 
 	@Override
-	public List<CarEntity> findCarsByKeeper(Long employeeId) {
-		TypedQuery<CarEntity> query = entityManager.createQuery(
-				"select car from CarEntity car where :employee_id member of car.keepers", CarEntity.class);
-		query.setParameter("employee_id", employeeId);
+	public List<CarEntity> findCarsByKeeper(EmployeeEntity keeperEntity) {
+		TypedQuery<CarEntity> query = entityManager
+				.createQuery("select ee.cars from EmployeeEntity ee where ee.id = :employee", CarEntity.class);
+		query.setParameter("employee", keeperEntity.getId());
 		return query.getResultList();
 	}
 

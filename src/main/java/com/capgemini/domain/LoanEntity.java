@@ -31,17 +31,19 @@ public class LoanEntity extends AbstractEntity implements Serializable {
 	private Long id;
 
 	@ManyToOne
-	@JoinColumn(name = "customer", nullable = false)
+	@JoinColumn(name = "customer_id", nullable = false)
 	private CustomerEntity customer;
 
 	@ManyToOne
-	@JoinColumn(name = "car", nullable = false)
+	@JoinColumn(name = "car_id", nullable = false)
 	private CarEntity car;
 
 	@ManyToOne
+	@JoinColumn(name = "office_from_id")
 	private OfficeEntity officeFrom;
 
 	@ManyToOne
+	@JoinColumn(name = "office_to_id")
 	private OfficeEntity officeTo;
 
 	@Column(nullable = false)

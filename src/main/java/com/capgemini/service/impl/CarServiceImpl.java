@@ -1,5 +1,6 @@
 package com.capgemini.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +25,31 @@ public class CarServiceImpl implements CarService {
 	@Override
 	@Transactional(readOnly = false)
 	public CarTO addNewCar(CarTO carTO) {
-		CarTO car = CarMapper.toCarTO(carDao.addNewCar(CarMapper.toCarEntity(carTO)));
-		return car;
+		CarEntity carEntity = carDao.addNewCar(CarMapper.toCarEntity(carTO));
+		return CarMapper.toCarTO(carEntity);
 	}
 
 	@Override
-	public void deleteCar(Long id) {
-		carDao.delete(id);
+	@Transactional(readOnly = false)
+	public void deleteCar(Long carId) {
+		carDao.deleteCar(carId);
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public CarTO updateCarData(CarTO carTO) {
-		CarEntity carEntity = CarMapper.toCarEntity(carTO);
-		return CarMapper.toCarTO(carDao.save(carEntity));
+		CarEntity carEntity = carDao.updateCarData(CarMapper.toCarEntity(carTO));
+		return CarMapper.toCarTO(carEntity);
+	}
+	
+	@Override
+	@Transactional
+	public CarTO findCarById(Long carId) {
+		return CarMapper.toCarTO(carDao.findOne(carId));
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void assignToKeeper(CarTO carTO, EmployeeTO employeeTO) {
 		carDao.assignToKeeper(CarMapper.toCarEntity(carTO), EmployeeMapper.toEmployeeEntity(employeeTO));
 
@@ -49,11 +59,14 @@ public class CarServiceImpl implements CarService {
 	public List<CarTO> findCarsByTypeAndBrand(String type, String brand) {
 		return CarMapper.map2TOs(carDao.findCarsByTypeAndBrand(type, brand));
 	}
-	
 
 	@Override
-	public List<CarTO> findCarsByKeeper(Long employeeId) {
-		return CarMapper.map2TOs(carDao.findCarsByKeeper(employeeId));
+	public List<CarTO> findCarsByKeeper(EmployeeTO keeperTO) {
+		List<CarEntity> cars = carDao.findCarsByKeeper(EmployeeMapper.toEmployeeEntity(keeperTO));
+		if (!cars.isEmpty()) {
+			return CarMapper.map2TOs(cars);
+		}
+		return new ArrayList<>();
 	}
 
 }

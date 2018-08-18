@@ -9,13 +9,15 @@ public interface CarService {
 
 	CarTO addNewCar(CarTO carTO);
 	 
-	 void deleteCar(Long id);
+	 void deleteCar(Long carId);
 	 
 	 CarTO updateCarData(CarTO carTO);
+	 
+	 CarTO findCarById(Long carId);
 	 
 	 void assignToKeeper(CarTO carTO, EmployeeTO employeeTO);
 	 
 	List<CarTO> findCarsByTypeAndBrand(String type, String brand);
 
-	 List<CarTO> findCarsByKeeper(Long employeeId);
+	 List<CarTO> findCarsByKeeper(EmployeeTO keeperTO);
 }

@@ -9,7 +9,7 @@ public interface CarDao extends Dao<CarEntity, Long> {
 
 	 CarEntity addNewCar(CarEntity carEntity);
 	 
-	 void deleteCar(Long id);
+	 void deleteCar(Long carId);
 	 
 	 CarEntity updateCarData(CarEntity carEntity);
 	 
@@ -17,7 +17,7 @@ public interface CarDao extends Dao<CarEntity, Long> {
 	 
 	 List<CarEntity> findCarsByTypeAndBrand(String type, String brand);
 
-	List<CarEntity> findCarsByKeeper(Long employeeId);
+	List<CarEntity> findCarsByKeeper(EmployeeEntity keeperEntity);
 
 	
 

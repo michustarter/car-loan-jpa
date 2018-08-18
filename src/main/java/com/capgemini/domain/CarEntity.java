@@ -2,6 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -56,7 +57,7 @@ public class CarEntity extends AbstractEntity implements Serializable {
 	private int mileage;
 
 	@ManyToMany(mappedBy = "cars", fetch = FetchType.LAZY)
-	private List<EmployeeEntity> keepers;
+	private List<EmployeeEntity> keepers=new ArrayList<>();
 
 	public CarEntity() {
 	}
