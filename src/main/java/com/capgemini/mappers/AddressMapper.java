@@ -13,6 +13,7 @@ public class AddressMapper {
 			return null;
 		}
 		return new AddressTOBuilder()
+				.withId(addressEntity.getId())
 				.withStreet(addressEntity.getStreet())
 				.withPostCode(addressEntity.getPostCode())
 				.withCity(addressEntity.getCity()).build();
@@ -23,6 +24,7 @@ public class AddressMapper {
 			return null;
 		}
 		AddressEntity addressEnitty = new AddressEntity();
+		addressEnitty.setId(addressTO.getId());
 		addressEnitty.setStreet(addressTO.getStreet());
 		addressEnitty.setPostCode(addressTO.getPostCode());
 		addressEnitty.setCity(addressTO.getCity());

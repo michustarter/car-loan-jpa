@@ -1,6 +1,6 @@
 package com.capgemini.mappers;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.capgemini.domain.LoanEntity;
@@ -40,11 +40,11 @@ public class LoanMapper {
 		loanEntity.setLoanPrice(loanTO.getLoanPrice());
 		return loanEntity;
 	}
-		public static Set<LoanTO> map2TOs(Set<LoanEntity> loanEntities) {
-			return loanEntities.stream().map(LoanMapper::toLoanTO).collect(Collectors.toSet());
+		public static List<LoanTO> map2TOs(List<LoanEntity> loanEntities) {
+			return loanEntities.stream().map(LoanMapper::toLoanTO).collect(Collectors.toList());
 		}
-		public static Set<LoanEntity> map2Entities(Set<LoanTO> loanTOs) {
-			return loanTOs.stream().map(LoanMapper::toLoanEntity).collect(Collectors.toSet());
+		public static List<LoanEntity> map2Entities(List<LoanTO> loanTOs) {
+			return loanTOs.stream().map(LoanMapper::toLoanEntity).collect(Collectors.toList());
 		}
 	}
 

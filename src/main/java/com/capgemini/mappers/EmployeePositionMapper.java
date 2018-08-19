@@ -1,6 +1,6 @@
 package com.capgemini.mappers;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.capgemini.domain.EmployeePositionEntity;
@@ -13,8 +13,10 @@ public class EmployeePositionMapper {
 		if (emplPositionEntity == null) {
 			return null;
 		}
-		return new EmployeePositionTOBuilder().withId(emplPositionEntity.getId())
-				.withPosition(emplPositionEntity.getPosition()).build();
+		return new EmployeePositionTOBuilder()
+				.withId(emplPositionEntity.getId())
+				.withPosition(emplPositionEntity.getPosition())
+				.build();
 	}
 
 	public static EmployeePositionEntity toEmployeePositionEntity(EmployeePositionTO emplPositionTO) {
@@ -27,14 +29,14 @@ public class EmployeePositionMapper {
 		return emplPositionEntity;
 	}
 
-	public static Set<EmployeePositionTO> map2TOs(Set<EmployeePositionEntity> emplPositionEntities) {
+	public static List<EmployeePositionTO> map2TOs(List<EmployeePositionEntity> emplPositionEntities) {
 		return emplPositionEntities.stream().map(EmployeePositionMapper::toEmployeePositionTO)
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 
-	public static Set<EmployeePositionEntity> map2Entities(Set<EmployeePositionTO> emplPositionTOs) {
+	public static List<EmployeePositionEntity> map2Entities(List<EmployeePositionTO> emplPositionTOs) {
 		return emplPositionTOs.stream().map(EmployeePositionMapper::toEmployeePositionEntity)
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 
 }
