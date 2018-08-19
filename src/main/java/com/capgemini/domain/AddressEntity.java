@@ -2,6 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -20,16 +21,18 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class AddressEntity extends AbstractEntity implements Serializable {
 
-	private static final long serialVersionUID = 1885673201728319134L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false, length = 50)
 	private String street;
 
+	@Column(nullable = false, length = 6)
 	private String postCode;
 
+	@Column(nullable = false, length = 50)
 	private String city;
 
 	public AddressEntity() {

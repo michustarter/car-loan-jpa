@@ -2,31 +2,29 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.capgemini.listeners.CreateEntityListener;
 import com.capgemini.listeners.UpdateEntityListener;
 
 @Entity
+@Table(name = "car")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
-@Table(name = "car")
 public class CarEntity extends AbstractEntity implements Serializable {
-
-	private static final long serialVersionUID = -2723223791523308758L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,8 +54,8 @@ public class CarEntity extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
 	private int mileage;
 
-	@ManyToMany(mappedBy = "cars", fetch = FetchType.LAZY)
-	private List<EmployeeEntity> keepers=new ArrayList<>();
+	@OneToMany(targetEntity = LoanEntity.class, mappedBy = "car", cascade = CascadeType.REMOVE)
+	private List<LoanEntity> loans = new LinkedList<>();
 
 	public CarEntity() {
 	}
@@ -134,30 +132,30 @@ public class CarEntity extends AbstractEntity implements Serializable {
 		this.mileage = mileage;
 	}
 
-	public List<EmployeeEntity> getKeepers() {
-		return keepers;
+	public List<LoanEntity> getLoans() {
+		return loans;
 	}
 
-	public void setKeepers(List<EmployeeEntity> keepers) {
-		this.keepers = keepers;
+	public void setLoans(List<LoanEntity> loans) {
+		this.loans = loans;
 	}
 
 	@Override
 	public String toString() {
 		return "CarEntity [id=" + id + ", type=" + type + ", brand=" + brand + ", model=" + model + ", productionYear="
 				+ productionYear + ", color=" + color + ", engineCapacity=" + engineCapacity + ", power=" + power
-				+ ", mileage=" + mileage + ", keepers=" + keepers + "]";
+				+ ", mileage=" + mileage + ", loans=" + loans + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + engineCapacity;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((keepers == null) ? 0 : keepers.hashCode());
+		result = prime * result + ((loans == null) ? 0 : loans.hashCode());
 		result = prime * result + mileage;
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result + power;
@@ -170,7 +168,7 @@ public class CarEntity extends AbstractEntity implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -192,10 +190,10 @@ public class CarEntity extends AbstractEntity implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (keepers == null) {
-			if (other.keepers != null)
+		if (loans == null) {
+			if (other.loans != null)
 				return false;
-		} else if (!keepers.equals(other.keepers))
+		} else if (!loans.equals(other.loans))
 			return false;
 		if (mileage != other.mileage)
 			return false;
@@ -218,5 +216,7 @@ public class CarEntity extends AbstractEntity implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 }

@@ -1,27 +1,39 @@
 package com.capgemini.domain;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.capgemini.listeners.CreateEntityListener;
 import com.capgemini.listeners.UpdateEntityListener;
 
 @Entity
+@Table(name = "office")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
-@Table(name = "office")
-
 public class OfficeEntity extends AbstractEntity implements Serializable {
 
-	private static final long serialVersionUID = 5636921016114621350L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name="address")
+	@JoinColumn(name="address_id")
 	private AddressEntity address;
 
 	@Column(nullable = false, length = 12)
@@ -29,6 +41,12 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 
 	@Column(nullable = false, length = 30)
 	private String mail;
+	
+	@OneToMany(targetEntity = LoanEntity.class, mappedBy = "officeFrom", cascade = CascadeType.REMOVE)
+    private List<LoanEntity> loansFrom = new LinkedList<>();
+
+    @OneToMany(targetEntity = LoanEntity.class, mappedBy = "officeTo", cascade = CascadeType.REMOVE)
+    private List<LoanEntity> loansTo = new LinkedList<>();
 
 	public OfficeEntity() {
 	}
@@ -65,53 +83,21 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 		this.mail = mail;
 	}
 
-	@Override
-	public String toString() {
-		return "OfficeEntity [id=" + id + ", address=" + address + ", phoneNumber=" + phoneNumber + ", mail=" + mail
-				+ "]";
+	public List<LoanEntity> getLoansFrom() {
+		return loansFrom;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
-		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
-		return result;
+	public void setLoansFrom(List<LoanEntity> loansFrom) {
+		this.loansFrom = loansFrom;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OfficeEntity other = (OfficeEntity) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (mail == null) {
-			if (other.mail != null)
-				return false;
-		} else if (!mail.equals(other.mail))
-			return false;
-		if (phoneNumber == null) {
-			if (other.phoneNumber != null)
-				return false;
-		} else if (!phoneNumber.equals(other.phoneNumber))
-			return false;
-		return true;
+	public List<LoanEntity> getLoansTo() {
+		return loansTo;
 	}
 
+	public void setLoansTo(List<LoanEntity> loansTo) {
+		this.loansTo = loansTo;
+	}
+
+	
 }
