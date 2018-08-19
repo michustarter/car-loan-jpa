@@ -38,7 +38,6 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 		wantedEmployee.getCars().add(carEntity);
 		entityManager.merge(wantedEmployee);
 		} catch (NoResultException e) {
-			
 		}
 
 	}

@@ -16,7 +16,6 @@ import com.capgemini.to.CarTO;
 import com.capgemini.to.EmployeeTO;
 
 @Service
-@Transactional
 public class CarServiceImpl implements CarService {
 
 	@Autowired
