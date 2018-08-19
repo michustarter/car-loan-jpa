@@ -14,25 +14,14 @@ public class EmployeeTO {
 	private String firstName;
 	private String lastName;
 	private Timestamp birthDate;
-	private List<CarTO> cars;
+	private List<CarTO> cars=new ArrayList<>();
 
 	public EmployeeTO() {
 		super();
 	}
 
-	public EmployeeTO(OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
+	public EmployeeTO(Long id, OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
 			Timestamp birthDate, List<CarTO> cars) {
-		super();
-		this.office = office;
-		this.employeePosition = employeePosition;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.birthDate = birthDate;
-		this.cars = cars;
-	}
-
-	public EmployeeTO(OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
-			Timestamp birthDate, List<CarTO> cars, Long id) {
 		super();
 		this.office = office;
 		this.employeePosition = employeePosition;
@@ -158,7 +147,7 @@ public class EmployeeTO {
 
 		public EmployeeTO build() {
 			checkBeforeBuild(office, employeePosition, firstName, lastName, birthDate, cars);
-			return new EmployeeTO(office, employeePosition, firstName, lastName, birthDate, cars, id);
+			return new EmployeeTO(id, office, employeePosition, firstName, lastName, birthDate, cars);
 		}
 
 		private void checkBeforeBuild(OfficeTO office, EmployeePositionTO employeePosition, String firstName,

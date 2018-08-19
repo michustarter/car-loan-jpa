@@ -1,6 +1,10 @@
 package com.capgemini.to;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.util.CollectionUtils;
 
 public class CustomerTO {
 
@@ -8,6 +12,7 @@ public class CustomerTO {
 	private String firstName;
 	private String lastName;
 	private AddressTO address;
+	private List<LoanTO> loans=new ArrayList<>();
 	private Timestamp birthDate;
 	private String phoneNumber;
 	private String creditCardNumber;
@@ -17,22 +22,14 @@ public class CustomerTO {
 		super();
 	}
 
-	public CustomerTO(String firstName, String lastName, AddressTO address, Timestamp birthDate, String phoneNumber,
+	public CustomerTO(Long id, String firstName, String lastName, AddressTO address,List<LoanTO> loans, Timestamp birthDate, String phoneNumber,
 			String creditCardNumber, String mail) {
 		super();
+		this.id=id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.birthDate = birthDate;
-		this.phoneNumber = phoneNumber;
-	}
-
-	public CustomerTO(String firstName, String lastName, AddressTO address, Timestamp birthDate, String phoneNumber,
-			String creditCardNumber, String mail, Long id) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
+		this.loans=loans;
 		this.birthDate = birthDate;
 		this.phoneNumber = phoneNumber;
 		this.id = id;
@@ -102,6 +99,15 @@ public class CustomerTO {
 		this.mail = mail;
 	}
 
+	
+	public List<LoanTO> getLoans() {
+		return loans;
+	}
+
+	public void setLoans(List<LoanTO> loans) {
+		this.loans = loans;
+	}
+
 	public static CustomerTOBuilder builder() {
 		return new CustomerTOBuilder();
 	}
@@ -111,6 +117,7 @@ public class CustomerTO {
 		private String firstName;
 		private String lastName;
 		private AddressTO address;
+		private List<LoanTO> loans=new ArrayList<>();
 		private Timestamp birthDate;
 		private String phoneNumber;
 		private String creditCardNumber;
@@ -139,6 +146,15 @@ public class CustomerTO {
 			this.address = address;
 			return this;
 		}
+		public CustomerTOBuilder withLoan(LoanTO loan) {
+			this.loans.add(loan);
+			return this;
+		}
+
+		public CustomerTOBuilder withLoans(List<LoanTO> loansToAdded) {
+			this.loans.addAll(loansToAdded);
+			return this;
+		}
 
 		public CustomerTOBuilder withBirthDate(Timestamp birthDate) {
 			this.birthDate = birthDate;
@@ -161,16 +177,16 @@ public class CustomerTO {
 		}
 
 		public CustomerTO build() {
-			checkBeforeBuild(firstName, lastName, address, birthDate, phoneNumber, creditCardNumber, mail);
-			return new CustomerTO(firstName, lastName, address, birthDate, phoneNumber, creditCardNumber, mail, id);
+			checkBeforeBuild(firstName, lastName, address,loans, birthDate, phoneNumber, creditCardNumber, mail);
+			return new CustomerTO(id,firstName, lastName, address, loans,birthDate, phoneNumber, creditCardNumber, mail);
 
 		}
 
-		private void checkBeforeBuild(String firstName, String lastName, AddressTO address, Timestamp birthDate,
+		private void checkBeforeBuild(String firstName, String lastName, AddressTO address, List<LoanTO> loans,Timestamp birthDate,
 				String phoneNumber, String creditCardNumber, String mail) {
 			if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || address == null
 					|| birthDate == null || phoneNumber == null || phoneNumber.length() != 12
-					|| creditCardNumber == null || creditCardNumber.length() != 16 || mail == null || mail.isEmpty()) {
+					|| creditCardNumber == null || creditCardNumber.length() != 16 || mail == null || mail.isEmpty()|| CollectionUtils.isEmpty(loans)) {
 				throw new RuntimeException("Incorrect customer to be created");
 			}
 		}
@@ -179,8 +195,8 @@ public class CustomerTO {
 	@Override
 	public String toString() {
 		return "CustomerTO [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber + ", creditCardNumber=" + creditCardNumber
-				+ ", mail=" + mail + "]";
+				+ ", loans=" + loans + ", birthDate=" + birthDate + ", phoneNumber=" + phoneNumber
+				+ ", creditCardNumber=" + creditCardNumber + ", mail=" + mail + "]";
 	}
 
 	@Override
@@ -193,6 +209,7 @@ public class CustomerTO {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((loans == null) ? 0 : loans.hashCode());
 		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		return result;
@@ -237,6 +254,11 @@ public class CustomerTO {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (loans == null) {
+			if (other.loans != null)
+				return false;
+		} else if (!loans.equals(other.loans))
+			return false;
 		if (mail == null) {
 			if (other.mail != null)
 				return false;
@@ -249,5 +271,7 @@ public class CustomerTO {
 			return false;
 		return true;
 	}
+
+	
 
 }

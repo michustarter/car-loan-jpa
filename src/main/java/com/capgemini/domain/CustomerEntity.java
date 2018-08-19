@@ -2,7 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,7 +44,7 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 	private AddressEntity address;
 	
 	@OneToMany(targetEntity = LoanEntity.class, mappedBy = "customer", cascade = CascadeType.REMOVE)
-    private List<LoanEntity> loans = new LinkedList<>();
+    private List<LoanEntity> loans = new ArrayList<>();
 
 	@Column(nullable = false)
 	private Timestamp birthDate;

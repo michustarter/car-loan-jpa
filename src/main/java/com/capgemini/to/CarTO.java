@@ -17,15 +17,17 @@ public class CarTO {
 	private int engineCapacity;
 	private int power;
 	private int mileage;
-	private List<EmployeeTO> keepers;
+	private List<LoanTO> loans=new ArrayList<>();
 
 	public CarTO() {
 		super();
 	}
 
-	public CarTO(String type, String brand, String model, Year productionYear, String color, int engineCapacity,
-			int power, int mileage, List<EmployeeTO> keepers) {
+	public CarTO(Long id, String type, String brand, String model, Year productionYear, String color, int engineCapacity,
+			int power, int mileage, List<LoanTO> loans) {
 		super();
+		
+		this.id=id;
 		this.type = type;
 		this.brand = brand;
 		this.model = model;
@@ -34,23 +36,9 @@ public class CarTO {
 		this.engineCapacity = engineCapacity;
 		this.power = power;
 		this.mileage = mileage;
-		this.keepers = keepers;
+		this.loans = loans;
 	}
 
-	public CarTO(String type, String brand, String model, Year productionYear, String color, int engineCapacity,
-			int power, int mileage, List<EmployeeTO> keepers, Long id) {
-		super();
-		this.type = type;
-		this.brand = brand;
-		this.model = model;
-		this.productionYear = productionYear;
-		this.color = color;
-		this.engineCapacity = engineCapacity;
-		this.power = power;
-		this.mileage = mileage;
-		this.keepers = keepers;
-		this.id = id;
-	}
 
 	public Long getId() {
 		return id;
@@ -124,12 +112,14 @@ public class CarTO {
 		this.mileage = mileage;
 	}
 
-	public List<EmployeeTO> getKeepers() {
-		return keepers;
+	
+
+	public List<LoanTO> getLoans() {
+		return loans;
 	}
 
-	public void setKeepers(List<EmployeeTO> keepers) {
-		this.keepers = keepers;
+	public void setLoans(List<LoanTO> loans) {
+		this.loans = loans;
 	}
 
 	public static CarTOBuilder builder() {
@@ -146,7 +136,7 @@ public class CarTO {
 		private int engineCapacity;
 		private int power;
 		private int mileage;
-		private List<EmployeeTO> keepers = new ArrayList<>();
+		private List<LoanTO> loans = new ArrayList<>();
 
 		public CarTOBuilder() {
 			super();
@@ -197,26 +187,26 @@ public class CarTO {
 			return this;
 		}
 
-		public CarTOBuilder withEmployee(EmployeeTO employee) {
-			this.keepers.add(employee);
+		public CarTOBuilder withLoan(LoanTO loan) {
+			this.loans.add(loan);
 			return this;
 		}
 
-		public CarTOBuilder withKeepers(List<EmployeeTO> keepersToBeadded) {
-			this.keepers.addAll(keepersToBeadded);
+		public CarTOBuilder withLoans(List<LoanTO> loansToAdded) {
+			this.loans.addAll(loansToAdded);
 			return this;
 		}
 
 		public CarTO build() {
-			checkBeforeBuild(type, brand, model, productionYear, color, engineCapacity, power, mileage, keepers);
-			return new CarTO(type, brand, model, productionYear, color, engineCapacity, power, mileage, keepers, id);
+			checkBeforeBuild(type, brand, model, productionYear, color, engineCapacity, power, mileage, loans);
+			return new CarTO(id,type, brand, model, productionYear, color, engineCapacity, power, mileage, loans);
 		}
 
 		private void checkBeforeBuild(String type, String brand, String model, Year productionYear, String color,
-				int engineCapacity, int power, int mileage, List<EmployeeTO> keepers) {
+				int engineCapacity, int power, int mileage, List<LoanTO> loans) {
 			if (type == null || type.isEmpty() || brand == null || brand.isEmpty() || model == null || model.isEmpty()
 					|| productionYear == null || color == null || color.isEmpty() || engineCapacity <= 0 || power <= 0
-					|| mileage < 0 || CollectionUtils.isEmpty(keepers)) {
+					|| mileage < 0 || CollectionUtils.isEmpty(loans)) {
 				throw new RuntimeException("Incorrect car to be created");
 			}
 		}
@@ -226,7 +216,7 @@ public class CarTO {
 	public String toString() {
 		return "CarTO [id=" + id + ", type=" + type + ", brand=" + brand + ", model=" + model + ", productionYear="
 				+ productionYear + ", color=" + color + ", engineCapacity=" + engineCapacity + ", power=" + power
-				+ ", mileage=" + mileage + ", keepers=" + keepers + "]";
+				+ ", mileage=" + mileage + ", loans=" + loans + "]";
 	}
 
 	@Override
@@ -237,7 +227,7 @@ public class CarTO {
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + engineCapacity;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((keepers == null) ? 0 : keepers.hashCode());
+		result = prime * result + ((loans == null) ? 0 : loans.hashCode());
 		result = prime * result + mileage;
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result + power;
@@ -272,10 +262,10 @@ public class CarTO {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (keepers == null) {
-			if (other.keepers != null)
+		if (loans == null) {
+			if (other.loans != null)
 				return false;
-		} else if (!keepers.equals(other.keepers))
+		} else if (!loans.equals(other.loans))
 			return false;
 		if (mileage != other.mileage)
 			return false;

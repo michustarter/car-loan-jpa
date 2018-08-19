@@ -1,9 +1,11 @@
 package com.capgemini.mappers;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.capgemini.domain.OfficeEntity;
+import com.capgemini.to.LoanTO;
 import com.capgemini.to.OfficeTO;
 import com.capgemini.to.OfficeTO.OfficeTOBuilder;
 
@@ -13,9 +15,11 @@ public class OfficeMapper {
 		if (officeEntity == null) {
 			return null;
 		}
-		return new OfficeTOBuilder().withId(officeEntity.getId())
+		List<LoanTO> loansFromTOs=LoanMapper.map2TOs(officeEntity.getLoansFrom());
+		List<LoanTO> loansTOTOs=LoanMapper.map2TOs(officeEntity.getLoansTo());
+		return new OfficeTOBuilder()
 				.withAddress(AddressMapper.toAddressTO(officeEntity.getAddress()))
-				.withPhoneNumber(officeEntity.getPhoneNumber()).withMail(officeEntity.getMail()).build();
+				.withPhoneNumber(officeEntity.getPhoneNumber()).withMail(officeEntity.getMail()).withId(officeEntity.getId()).build();
 	}
 
 	public static OfficeEntity toOfficeEntity(OfficeTO officeTO) {

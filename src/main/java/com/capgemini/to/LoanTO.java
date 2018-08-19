@@ -17,20 +17,9 @@ public class LoanTO {
 		super();
 	}
 
-	public LoanTO(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
-			Timestamp returnDate, int loanPrice) {
-		super();
-		this.customer = customer;
-		this.car = car;
-		this.officeFrom = officeFrom;
-		this.officeTo = officeTo;
-		this.rentalDate = rentalDate;
-		this.returnDate = returnDate;
-		this.loanPrice = loanPrice;
-	}
 
-	public LoanTO(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
-			Timestamp returnDate, int loanPrice, Long id) {
+	public LoanTO(Long id,CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
+			Timestamp returnDate, int loanPrice) {
 		super();
 		this.customer = customer;
 		this.car = car;
@@ -166,7 +155,7 @@ public class LoanTO {
 
 		public LoanTO build() {
 			checkBeforeBuild(customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice);
-			return new LoanTO(customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice, id);
+			return new LoanTO(id,customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice);
 		}
 
 		private void checkBeforeBuild(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo,

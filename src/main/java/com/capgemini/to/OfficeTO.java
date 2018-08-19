@@ -1,29 +1,33 @@
 package com.capgemini.to;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import org.springframework.util.CollectionUtils;
+
 public class OfficeTO {
 
 	private Long id;
 	private AddressTO address;
 	private String phoneNumber;
 	private String mail;
+	private List<LoanTO> loansFrom = new LinkedList<>();
+	private List<LoanTO> loansTo = new LinkedList<>();
 
 	public OfficeTO() {
 		super();
 	}
 
-	public OfficeTO(AddressTO address, String phoneNumber, String mail) {
-		super();
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.mail = mail;
-	}
 
-	public OfficeTO(AddressTO address, String phoneNumber, String mail, Long id) {
+
+	public OfficeTO(Long id, AddressTO address, String phoneNumber, String mail, List<LoanTO> loansFrom, List<LoanTO> loansTo) {
 		super();
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 		this.mail = mail;
 		this.id = id;
+		this.loansFrom=loansFrom;
+		this.loansTo=loansTo;
 	}
 
 	public Long getId() {
@@ -58,6 +62,30 @@ public class OfficeTO {
 		this.mail = mail;
 	}
 
+	public List<LoanTO> getLoansFrom() {
+		return loansFrom;
+	}
+
+
+
+	public void setLoansFrom(List<LoanTO> loansFrom) {
+		this.loansFrom = loansFrom;
+	}
+
+
+
+	public List<LoanTO> getLoansTo() {
+		return loansTo;
+	}
+
+
+
+	public void setLoansTO(List<LoanTO> loansTo) {
+		this.loansTo = loansTo;
+	}
+
+
+
 	public static OfficeTOBuilder builder() {
 		return new OfficeTOBuilder();
 	}
@@ -67,6 +95,8 @@ public class OfficeTO {
 		private AddressTO address;
 		private String phoneNumber;
 		private String mail;
+		private List<LoanTO> loansFrom = new LinkedList<>();
+		private List<LoanTO> loansTo = new LinkedList<>();
 
 		public OfficeTOBuilder() {
 			super();
@@ -91,14 +121,32 @@ public class OfficeTO {
 			this.mail = mail;
 			return this;
 		}
+		public OfficeTOBuilder withLoanFrom(LoanTO loanFrom) {
+			this.loansFrom.add(loanFrom);
+			return this;
+		}
+
+		public OfficeTOBuilder withLoansFrom(List<LoanTO> loansFromToAdded) {
+			this.loansFrom.addAll(loansFromToAdded);
+			return this;
+		}
+		public OfficeTOBuilder withLoanTo(LoanTO loanTo) {
+			this.loansTo.add(loanTo);
+			return this;
+		}
+
+		public OfficeTOBuilder withLoansTo(List<LoanTO> loansToToAdded) {
+			this.loansTo.addAll(loansToToAdded);
+			return this;
+		}
 
 		public OfficeTO build() {
 			checkBeforeBuild(address, phoneNumber, mail);
-			return new OfficeTO(address, phoneNumber, mail, id);
+			return new OfficeTO(id,address, phoneNumber, mail, loansFrom,loansTo);
 		}
 
 		private void checkBeforeBuild(AddressTO address, String phoneNumber, String mail) {
-			if (address == null || phoneNumber == null || mail == null) {
+			if (address == null || phoneNumber == null || mail == null|| CollectionUtils.isEmpty(loansFrom)|| CollectionUtils.isEmpty(loansTo)) {
 				throw new RuntimeException("Incorrect office to be created");
 			}
 		}
@@ -106,8 +154,11 @@ public class OfficeTO {
 
 	@Override
 	public String toString() {
-		return "OfficeTO [id=" + id + ", address=" + address + ", phoneNumber=" + phoneNumber + ", mail=" + mail + "]";
+		return "OfficeTO [id=" + id + ", address=" + address + ", phoneNumber=" + phoneNumber + ", mail=" + mail
+				+ ", loansFrom=" + loansFrom + ", loansTo=" + loansTo + "]";
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -115,10 +166,14 @@ public class OfficeTO {
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((loansFrom == null) ? 0 : loansFrom.hashCode());
+		result = prime * result + ((loansTo == null) ? 0 : loansTo.hashCode());
 		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -139,6 +194,16 @@ public class OfficeTO {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (loansFrom == null) {
+			if (other.loansFrom != null)
+				return false;
+		} else if (!loansFrom.equals(other.loansFrom))
+			return false;
+		if (loansTo == null) {
+			if (other.loansTo != null)
+				return false;
+		} else if (!loansTo.equals(other.loansTo))
+			return false;
 		if (mail == null) {
 			if (other.mail != null)
 				return false;
@@ -151,5 +216,7 @@ public class OfficeTO {
 			return false;
 		return true;
 	}
+
+	
 
 }

@@ -2,7 +2,7 @@ package com.capgemini.domain;
 
 import java.io.Serializable;
 import java.time.Year;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -55,7 +55,7 @@ public class CarEntity extends AbstractEntity implements Serializable {
 	private int mileage;
 
 	@OneToMany(targetEntity = LoanEntity.class, mappedBy = "car", cascade = CascadeType.REMOVE)
-	private List<LoanEntity> loans = new LinkedList<>();
+	private List<LoanEntity> loans = new ArrayList<>();
 
 	public CarEntity() {
 	}
