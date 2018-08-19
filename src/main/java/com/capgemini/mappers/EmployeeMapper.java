@@ -33,6 +33,7 @@ public class EmployeeMapper {
 		}
 		EmployeeEntity employeeEntity = new EmployeeEntity();
 		List<CarEntity> cars=CarMapper.map2Entities(employeeTO.getCars());
+		employeeEntity.setId(employeeTO.getId());
 		employeeEntity.setOffice(OfficeMapper.toOfficeEntity(employeeTO.getOffice()));
 		employeeEntity.setEmployeePosition(EmployeePositionMapper.toEmployeePositionEntity(employeeTO.getEmployeePosition()));
 		employeeEntity.setFirstName(employeeTO.getFirstName());

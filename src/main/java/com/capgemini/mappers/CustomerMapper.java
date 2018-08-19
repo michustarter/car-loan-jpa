@@ -30,6 +30,7 @@ public class CustomerMapper {
 			return null;
 		}
 		CustomerEntity customerEntity=new CustomerEntity();
+		customerEntity.setId(customerTO.getId());
 		customerEntity.setFirstName(customerTO.getFirstName());
 		customerEntity.setLastName(customerTO.getLastName());
 		customerEntity.setAddress(AddressMapper.toAddressEntity(customerTO.getAddress()));

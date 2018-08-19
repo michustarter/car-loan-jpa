@@ -22,6 +22,7 @@ public class EmployeePositionMapper {
 			return null;
 		}
 		EmployeePositionEntity emplPositionEntity = new EmployeePositionEntity();
+		emplPositionEntity.setId(emplPositionTO.getId());
 		emplPositionEntity.setPosition(emplPositionTO.getPosition());
 		return emplPositionEntity;
 	}

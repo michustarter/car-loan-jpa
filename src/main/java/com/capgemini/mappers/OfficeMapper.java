@@ -23,6 +23,7 @@ public class OfficeMapper {
 			return null;
 		}
 		OfficeEntity officeEntity = new OfficeEntity();
+		officeEntity.setId(officeTO.getId());
 		officeEntity.setAddress(AddressMapper.toAddressEntity(officeTO.getAddress()));
 		officeEntity.setPhoneNumber(officeTO.getPhoneNumber());
 		officeEntity.setMail(officeEntity.getMail());

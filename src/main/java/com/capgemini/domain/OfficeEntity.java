@@ -22,12 +22,6 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 
 	@OneToOne
 	@JoinColumn(name="address")
-	@Embedded
-	@AttributeOverrides(value={
-			@AttributeOverride(name="street", column=@Column(length=30)),
-			@AttributeOverride(name="postCode", column=@Column(length=6)),
-			@AttributeOverride(name="city", column=@Column(length=20))		
-	})
 	private AddressEntity address;
 
 	@Column(nullable = false, length = 12)

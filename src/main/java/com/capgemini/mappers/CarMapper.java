@@ -35,6 +35,7 @@ public class CarMapper {
 		}
 		CarEntity carEntity = new CarEntity();
 		List<EmployeeEntity> keepers = EmployeeMapper.map2Entities(carTO.getKeepers());
+	carEntity.setId(carTO.getId());
 	carEntity.setType(carTO.getType());
 	carEntity.setBrand(carTO.getBrand());
 	carEntity.setModel(carTO.getModel());

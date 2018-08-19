@@ -3,11 +3,8 @@ package com.capgemini.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
@@ -41,14 +38,8 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 	@Column(nullable = false, length = 30)
 	private String lastName;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "address")
-	@Embedded
-	@AttributeOverrides(value={
-			@AttributeOverride(name="street", column=@Column(length=30)),
-			@AttributeOverride(name="postCode", column=@Column(length=6)),
-			@AttributeOverride(name="city", column=@Column(length=20))		
-	})
+	@ManyToOne
+	@JoinColumn(name = "address_id", nullable = false)
 	private AddressEntity address;
 
 	@Column(nullable = false)

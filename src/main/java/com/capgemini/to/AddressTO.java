@@ -1,7 +1,8 @@
 package com.capgemini.to;
 
 public class AddressTO {
-
+	
+	private Long id;
 	private String street;
 	private String postCode;
 	private String city;
@@ -14,6 +15,22 @@ public class AddressTO {
 		this.street = street;
 		this.postCode = postCode;
 		this.city = city;
+	}
+	public AddressTO(Long id,String street, String postCode, String city) {
+		super();
+		this.id=id;
+		this.street = street;
+		this.postCode = postCode;
+		this.city = city;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getStreet() {
@@ -45,6 +62,7 @@ public class AddressTO {
 	}
 
 	public static class AddressTOBuilder {
+		private Long id;
 		private String street;
 		private String postCode;
 		private String city;
@@ -52,7 +70,11 @@ public class AddressTO {
 		public AddressTOBuilder() {
 			super();
 		}
-
+		public AddressTOBuilder withId(Long id)	{
+			this.id=id;
+			return this;
+		}
+		
 		public AddressTOBuilder withStreet(String street) {
 			this.street = street;
 			return this;
@@ -70,7 +92,7 @@ public class AddressTO {
 
 		public AddressTO build() {
 			checkBeforeBuild(street, postCode, city);
-			return new AddressTO(street, postCode, city);
+			return new AddressTO(id,street, postCode, city);
 		}
 
 		private void checkBeforeBuild(String street, String postCode, String city) {
@@ -83,7 +105,7 @@ public class AddressTO {
 
 	@Override
 	public String toString() {
-		return "AddressTO [street=" + street + ", postCode=" + postCode + ", city=" + city + "]";
+		return "AddressTO [id=" + id + ", street=" + street + ", postCode=" + postCode + ", city=" + city + "]";
 	}
 
 	@Override
@@ -91,6 +113,7 @@ public class AddressTO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((postCode == null) ? 0 : postCode.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
 		return result;
@@ -109,6 +132,11 @@ public class AddressTO {
 			if (other.city != null)
 				return false;
 		} else if (!city.equals(other.city))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (postCode == null) {
 			if (other.postCode != null)

@@ -30,6 +30,7 @@ public class LoanMapper {
 			return null;
 		}
 		LoanEntity loanEntity=new LoanEntity();
+		loanEntity.setId(loanTO.getId());
 		loanEntity.setCustomer(CustomerMapper.toCustomerEntity(loanTO.getCustomer()));
 		loanEntity.setCar(CarMapper.toCarEntity(loanTO.getCar()));
 		loanEntity.setOfficeFrom(OfficeMapper.toOfficeEntity(loanTO.getOfficeFrom()));
