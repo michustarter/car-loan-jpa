@@ -14,11 +14,9 @@ public class LoanTO {
 	private int loanPrice;
 
 	public LoanTO() {
-		super();
 	}
 
-
-	public LoanTO(Long id,CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
+	public LoanTO(Long id, CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
 			Timestamp returnDate, int loanPrice) {
 		super();
 		this.customer = customer;
@@ -110,7 +108,6 @@ public class LoanTO {
 		private int loanPrice;
 
 		public LoanTOBuilder() {
-			super();
 		}
 
 		public LoanTOBuilder withId(Long id) {
@@ -155,7 +152,7 @@ public class LoanTO {
 
 		public LoanTO build() {
 			checkBeforeBuild(customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice);
-			return new LoanTO(id,customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice);
+			return new LoanTO(id, customer, car, officeFrom, officeTo, rentalDate, returnDate, loanPrice);
 		}
 
 		private void checkBeforeBuild(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo,
@@ -165,6 +162,5 @@ public class LoanTO {
 				throw new RuntimeException("Incorrect loan to be created");
 			}
 		}
-
 	}
 }

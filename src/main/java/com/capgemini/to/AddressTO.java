@@ -7,23 +7,14 @@ public class AddressTO {
 	private String postCode;
 	private String city;
 
-	public AddressTO() {
-	}
+	public AddressTO() {}
 
-	public AddressTO(String street, String postCode, String city) {
-		super();
-		this.street = street;
-		this.postCode = postCode;
-		this.city = city;
-	}
 	public AddressTO(Long id,String street, String postCode, String city) {
-		super();
-		this.id=id;
+		this.id = id;
 		this.street = street;
 		this.postCode = postCode;
 		this.city = city;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -67,11 +58,10 @@ public class AddressTO {
 		private String postCode;
 		private String city;
 
-		public AddressTOBuilder() {
-			super();
-		}
+		public AddressTOBuilder() {}
+
 		public AddressTOBuilder withId(Long id)	{
-			this.id=id;
+			this.id = id;
 			return this;
 		}
 		
@@ -96,9 +86,8 @@ public class AddressTO {
 		}
 
 		private void checkBeforeBuild(String street, String postCode, String city) {
-			if (street == null || street.isEmpty() || postCode == null || postCode.isEmpty() || city == null
-					|| city.isEmpty()) {
-				throw new RuntimeException("Incorrect adress to be created");
+			if (street == null || street.isEmpty() || postCode == null || postCode.isEmpty() || city == null || city.isEmpty()) {
+				throw new RuntimeException("Incorrect address to be created");
 			}
 		}
 	}
@@ -150,5 +139,4 @@ public class AddressTO {
 			return false;
 		return true;
 	}
-
 }

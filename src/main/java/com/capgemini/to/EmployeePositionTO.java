@@ -5,17 +5,9 @@ public class EmployeePositionTO {
 	private Long id;
 	private String position;
 
-	public EmployeePositionTO() {
-		super();
-	}
-
-	public EmployeePositionTO(String position) {
-		super();
-		this.position = position;
-	}
+	public EmployeePositionTO() {}
 
 	public EmployeePositionTO(String position, Long id) {
-		super();
 		this.position = position;
 		this.id = id;
 	}
@@ -44,21 +36,23 @@ public class EmployeePositionTO {
 		private Long id;
 		private String position;
 
-		public EmployeePositionTOBuilder() {
-			super();
-		}
+		public EmployeePositionTOBuilder() {}
+
 		public EmployeePositionTOBuilder withId(Long id) {
 			this.id=id;
 			return this;
 		}
+
 		public EmployeePositionTOBuilder withPosition(String position) {
 			this.position=position;
 			return this;
 		}
+
 		public EmployeePositionTO build() {
 			checkBeforeBuild(position);
 			return new EmployeePositionTO(position, id);
 		}
+
 		private void checkBeforeBuild(String position) {
 			if (position == null||position.isEmpty()) {
 				throw new RuntimeException("Incorrect employeePosition to be created");
@@ -101,5 +95,4 @@ public class EmployeePositionTO {
 			return false;
 		return true;
 	}
-	
 }

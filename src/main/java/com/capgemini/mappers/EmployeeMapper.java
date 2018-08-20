@@ -1,7 +1,6 @@
 package com.capgemini.mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.capgemini.domain.CarEntity;
 import com.capgemini.domain.EmployeeEntity;
@@ -9,10 +8,12 @@ import com.capgemini.to.CarTO;
 import com.capgemini.to.EmployeeTO;
 import com.capgemini.to.EmployeeTO.EmployeeTOBuilder;
 
+import static java.util.stream.Collectors.toList;
+
 public class EmployeeMapper {
 
 	public static EmployeeTO toEmployeeTO(EmployeeEntity employeeEnitity) {
-		if(employeeEnitity==null) {
+		if (employeeEnitity == null) {
 			return null;
 		}
 		List<CarTO> carTOs=CarMapper.map2TOs(employeeEnitity.getCars());
@@ -28,7 +29,7 @@ public class EmployeeMapper {
 	}
 	
 	public static EmployeeEntity toEmployeeEntity(EmployeeTO employeeTO) {
-		if (employeeTO==null) {
+		if (employeeTO == null) {
 			return null;
 		}
 		EmployeeEntity employeeEntity = new EmployeeEntity();
@@ -42,10 +43,12 @@ public class EmployeeMapper {
 		employeeEntity.setCars(cars);
 		return employeeEntity;
 	}
+
 	public static List<EmployeeTO> map2TOs(List<EmployeeEntity> employeeEntities) {
-		return employeeEntities.stream().map(EmployeeMapper::toEmployeeTO).collect(Collectors.toList());
+		return employeeEntities.stream().map(EmployeeMapper::toEmployeeTO).collect(toList());
 	}
+
 	public static List<EmployeeEntity> map2Entities(List<EmployeeTO> employeeTOs) {
-		return employeeTOs.stream().map(EmployeeMapper::toEmployeeEntity).collect(Collectors.toList());
+		return employeeTOs.stream().map(EmployeeMapper::toEmployeeEntity).collect(toList());
 	}
 }

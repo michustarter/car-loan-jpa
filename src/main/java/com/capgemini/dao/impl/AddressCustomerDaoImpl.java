@@ -11,7 +11,6 @@ import com.capgemini.domain.AddressCustomerEntity;
 @Repository
 public class AddressCustomerDaoImpl extends AbstractDao<AddressCustomerEntity, Long> implements AddressCustomerDao {
 
-
     @Override
     public AddressCustomerEntity addNewAddress(AddressCustomerEntity newAddress) {
         TypedQuery<AddressCustomerEntity> query = entityManager.createQuery(
@@ -28,11 +27,4 @@ public class AddressCustomerDaoImpl extends AbstractDao<AddressCustomerEntity, L
         }
 
     }
-
-    @Override
-    public void deleteAddress(long id) {
-        delete(id);
-    }
-
-
 }

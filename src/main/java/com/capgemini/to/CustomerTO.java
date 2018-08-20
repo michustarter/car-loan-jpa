@@ -16,21 +16,17 @@ public class CustomerTO {
 	private String creditCardNumber;
 	private String mail;
 
-	public CustomerTO() {
-		super();
-	}
+	public CustomerTO() {}
 
 	public CustomerTO(Long id, String firstName, String lastName, AddressTO address,List<LoanTO> loans, Date birthDate, String phoneNumber,
 			String creditCardNumber, String mail) {
-		super();
-		this.id=id;
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.loans=loans;
 		this.birthDate = birthDate;
 		this.phoneNumber = phoneNumber;
-		this.id = id;
 	}
 
 	public Long getId() {
@@ -96,7 +92,6 @@ public class CustomerTO {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-
 	
 	public List<LoanTO> getLoans() {
 		return loans;
@@ -121,9 +116,7 @@ public class CustomerTO {
 		private String creditCardNumber;
 		private String mail;
 
-		public CustomerTOBuilder() {
-			super();
-		}
+		public CustomerTOBuilder() {}
 
 		public CustomerTOBuilder withId(Long id) {
 			this.id = id;
@@ -177,14 +170,13 @@ public class CustomerTO {
 		public CustomerTO build() {
 			checkBeforeBuild(firstName, lastName, address,loans, birthDate, phoneNumber, creditCardNumber, mail);
 			return new CustomerTO(id,firstName, lastName, address, loans,birthDate, phoneNumber, creditCardNumber, mail);
-
 		}
 
-		private void checkBeforeBuild(String firstName, String lastName, AddressTO address, List<LoanTO> loans,Date birthDate,
+		private void checkBeforeBuild(String firstName, String lastName, AddressTO address, List<LoanTO> loans, Date birthDate,
 				String phoneNumber, String creditCardNumber, String mail) {
 			if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || address == null
-					|| birthDate == null || phoneNumber == null || phoneNumber.length() != 12
-					|| creditCardNumber == null || creditCardNumber.length() != 16 || mail == null || mail.isEmpty()) {
+					|| birthDate == null || phoneNumber == null || phoneNumber.length() != 12 || creditCardNumber == null
+					|| creditCardNumber.length() != 16 || mail == null || mail.isEmpty() || loans == null) {
 				throw new RuntimeException("Incorrect customer to be created");
 			}
 		}
@@ -269,7 +261,4 @@ public class CustomerTO {
 			return false;
 		return true;
 	}
-
-	
-
 }

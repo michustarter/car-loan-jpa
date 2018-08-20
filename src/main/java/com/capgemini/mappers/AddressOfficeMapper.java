@@ -1,11 +1,12 @@
 package com.capgemini.mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.capgemini.domain.AddressOfficeEntity;
 import com.capgemini.to.AddressTO;
 import com.capgemini.to.AddressTO.AddressTOBuilder;
+
+import static java.util.stream.Collectors.toList;
 
 public class AddressOfficeMapper {
 	public static AddressTO toAddressTO(AddressOfficeEntity addressEntity) {
@@ -29,21 +30,19 @@ public class AddressOfficeMapper {
 		addressEnitty.setPostCode(addressTO.getPostCode());
 		addressEnitty.setCity(addressTO.getCity());
 		return addressEnitty;
-
 	}
 
 	public static List<AddressTO> map2TOs(List<AddressOfficeEntity> addressEntities) {
-		return addressEntities
-				.stream()
-			   .map(AddressOfficeMapper::toAddressTO)
-			   .collect(Collectors.toList());
+		return addressEntities.stream()
+				.map(AddressOfficeMapper::toAddressTO)
+				.collect(toList());
 	}
 
 	public static List<AddressOfficeEntity> map2Entities(List<AddressTO> addressTOs) {
 		return addressTOs
 				.stream()
 				.map(AddressOfficeMapper::toAddressEntity)
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
 
 }

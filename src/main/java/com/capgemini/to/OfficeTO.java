@@ -12,11 +12,7 @@ public class OfficeTO {
 	private List<LoanTO> loansFrom = new LinkedList<>();
 	private List<LoanTO> loansTo = new LinkedList<>();
 
-	public OfficeTO() {
-		super();
-	}
-
-
+	public OfficeTO() {}
 
 	public OfficeTO(Long id, AddressTO address, String phoneNumber, String mail, List<LoanTO> loansFrom, List<LoanTO> loansTo) {
 		super();
@@ -64,25 +60,17 @@ public class OfficeTO {
 		return loansFrom;
 	}
 
-
-
 	public void setLoansFrom(List<LoanTO> loansFrom) {
 		this.loansFrom = loansFrom;
 	}
-
-
 
 	public List<LoanTO> getLoansTo() {
 		return loansTo;
 	}
 
-
-
 	public void setLoansTO(List<LoanTO> loansTo) {
 		this.loansTo = loansTo;
 	}
-
-
 
 	public static OfficeTOBuilder builder() {
 		return new OfficeTOBuilder();
@@ -96,9 +84,7 @@ public class OfficeTO {
 		private List<LoanTO> loansFrom = new LinkedList<>();
 		private List<LoanTO> loansTo = new LinkedList<>();
 
-		public OfficeTOBuilder() {
-			super();
-		}
+		public OfficeTOBuilder() {}
 
 		public OfficeTOBuilder withId(Long id) {
 			this.id = id;
@@ -156,8 +142,6 @@ public class OfficeTO {
 				+ ", loansFrom=" + loansFrom + ", loansTo=" + loansTo + "]";
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -170,8 +154,6 @@ public class OfficeTO {
 		result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -214,7 +196,4 @@ public class OfficeTO {
 			return false;
 		return true;
 	}
-
-	
-
 }

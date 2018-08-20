@@ -9,10 +9,9 @@ import com.capgemini.domain.AbstractEntity;
 
 public class CreateEntityListener {
 
-	   @PrePersist
-	   protected void onCreate(AbstractEntity abstractEntity) {
-	       Date creationDate= new Date();
-	       abstractEntity.setCreated(new Timestamp(creationDate.getTime()));
-	   }
-
+	@PrePersist
+	protected void onCreate(AbstractEntity abstractEntity) {
+		Date creationDate= new Date();
+		abstractEntity.setCreated(new Timestamp(creationDate.getTime()));
 	}
+}

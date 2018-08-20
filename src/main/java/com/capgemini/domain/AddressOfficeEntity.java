@@ -21,10 +21,6 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class AddressOfficeEntity  implements Serializable {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7135863269989556096L;
 
 	@Id

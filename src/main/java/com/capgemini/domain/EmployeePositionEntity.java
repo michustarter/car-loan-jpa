@@ -21,7 +21,6 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class EmployeePositionEntity extends AbstractEntity implements Serializable {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

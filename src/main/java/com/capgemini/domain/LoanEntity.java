@@ -23,7 +23,6 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class LoanEntity extends AbstractEntity implements Serializable {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -43,7 +42,7 @@ public class LoanEntity extends AbstractEntity implements Serializable {
 	@Column(nullable = false)
 	private Timestamp rentalDate;
 
-	@Column(nullable = true)
+	@Column
 	private Timestamp returnDate;
 
 	@Column(nullable = false)

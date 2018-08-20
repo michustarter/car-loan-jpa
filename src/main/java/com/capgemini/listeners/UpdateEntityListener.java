@@ -9,10 +9,9 @@ import com.capgemini.domain.AbstractEntity;
 
 public class UpdateEntityListener {
 
-	   @PreUpdate
-	   protected void onUpdate(AbstractEntity abstractEntity) {
-	       Date updateDate= new Date();
-	       abstractEntity.setUpdated(new Timestamp(updateDate.getTime()));
-	   }
-
+	@PreUpdate
+	protected void onUpdate(AbstractEntity abstractEntity) {
+		Date updateDate= new Date();
+		abstractEntity.setUpdated(new Timestamp(updateDate.getTime()));
 	}
+}

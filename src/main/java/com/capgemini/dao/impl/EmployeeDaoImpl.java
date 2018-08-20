@@ -14,23 +14,6 @@ import com.capgemini.domain.EmployeeEntity;
 public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Long> implements EmployeeDao {
 
 	@Override
-	public EmployeeEntity addNewEmployee(EmployeeEntity newEmployee) {
-
-		return save(newEmployee);
-	}
-
-	@Override
-	public void deleteEmployee(EmployeeEntity removedEmployee) {
-		delete(removedEmployee);
-	}
-
-	@Override
-	public EmployeeEntity updateEmployeeData(EmployeeEntity updateEmployee) {
-		return update(updateEmployee);
-	}
-	
-
-	@Override
 	public List<EmployeeEntity> findOfficeEmployees(Long officeId) {
 		TypedQuery<EmployeeEntity> query = entityManager.createQuery(
 				"select ee from EmployeeEntity ee inner join ee.office o where o.id = :officeId ",
@@ -38,16 +21,14 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Long> implement
 		query.setParameter("officeId", officeId);
 
 		try {
-			List<EmployeeEntity> employeesEntity = query.getResultList();
-			return employeesEntity;
-
+			return query.getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}
 	}
 
 	@Override
-	public List<EmployeeEntity> findCarKeepersfromOffice(Long officeId, Long carId) {
+	public List<EmployeeEntity> findCarKeepersFromOffice(Long officeId, Long carId) {
 		TypedQuery<EmployeeEntity> query = entityManager
 				.createQuery(
 						"select ee " + "from EmployeeEntity ee inner join ee.office of "
@@ -57,10 +38,7 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Long> implement
 		query.setParameter("carId", carId);
 
 		try {
-
-			List<EmployeeEntity> employeesEntity = query.getResultList();
-			return employeesEntity;
-
+			return query.getResultList();
 		} catch (NoResultException e) {
 			return null;
 		}

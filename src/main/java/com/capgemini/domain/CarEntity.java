@@ -217,6 +217,4 @@ public class CarEntity extends AbstractEntity implements Serializable {
 		return true;
 	}
 
-
-
 }

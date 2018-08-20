@@ -17,15 +17,11 @@ public class CarTO {
 	private int mileage;
 	private List<LoanTO> loans=new ArrayList<>();
 
-	public CarTO() {
-		super();
-	}
+	public CarTO() {}
 
 	public CarTO(Long id, String type, String brand, String model, Year productionYear, String color, int engineCapacity,
 			int power, int mileage, List<LoanTO> loans) {
-		super();
-		
-		this.id=id;
+		this.id = id;
 		this.type = type;
 		this.brand = brand;
 		this.model = model;
@@ -36,7 +32,6 @@ public class CarTO {
 		this.mileage = mileage;
 		this.loans = loans;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -136,9 +131,7 @@ public class CarTO {
 		private int mileage;
 		private List<LoanTO> loans = new ArrayList<>();
 
-		public CarTOBuilder() {
-			super();
-		}
+		public CarTOBuilder() {}
 
 		public CarTOBuilder withId(Long id) {
 			this.id = id;
@@ -204,7 +197,7 @@ public class CarTO {
 				int engineCapacity, int power, int mileage, List<LoanTO> loans) {
 			if (type == null || type.isEmpty() || brand == null || brand.isEmpty() || model == null || model.isEmpty()
 					|| productionYear == null || color == null || color.isEmpty() || engineCapacity <= 0 || power <= 0
-					|| mileage < 0) {
+					|| mileage < 0 || loans == null) {
 				throw new RuntimeException("Incorrect car to be created");
 			}
 		}
@@ -286,5 +279,4 @@ public class CarTO {
 			return false;
 		return true;
 	}
-
 }

@@ -10,18 +10,17 @@ public interface EmployeeService {
 	EmployeeTO addNewEmployee(EmployeeTO employee);
 
 	void deleteEmployee(EmployeeTO removeEmployee);
-	
-	 EmployeeTO findEmployeeById(Long Id);
-	
-EmployeeTO updateEmployeeData(EmployeeTO updateEmployee);
-	
-	EmployeeTO deleteEmployeeFromOffice(EmployeeTO employee, OfficeTO office);
-	
-	
+
+	EmployeeTO findEmployeeById(Long Id);
+
+	EmployeeTO update(EmployeeTO updateEmployee);
+
+	EmployeeTO deleteEmployeeFromOffice(EmployeeTO employee);
+
 	EmployeeTO setOfficeToEmployee(EmployeeTO employee, OfficeTO office);
 
 	List<EmployeeTO> findOfficeEmployees(Long officeId);
 
-	List<EmployeeTO> findCarKeepersfromOffice(Long officeId, Long carId);
+	List<EmployeeTO> findCarKeepersFromOffice(Long officeId, Long carId);
 	
 }

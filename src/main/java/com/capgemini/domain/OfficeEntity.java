@@ -27,7 +27,6 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class OfficeEntity extends AbstractEntity implements Serializable {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -98,6 +97,4 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 	public void setLoansTo(List<LoanEntity> loansTo) {
 		this.loansTo = loansTo;
 	}
-
-	
 }

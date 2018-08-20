@@ -6,36 +6,37 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.dao.OfficeDao;
 import com.capgemini.domain.OfficeEntity;
-import com.capgemini.mappers.OfficeMapper;
 import com.capgemini.service.OfficeService;
 import com.capgemini.to.OfficeTO;
+
+import static com.capgemini.mappers.OfficeMapper.toOfficeEntity;
+import static com.capgemini.mappers.OfficeMapper.toOfficeTO;
 
 @Service
 @Transactional
 public class OfficeServiceImpl implements OfficeService {
 
+	private final OfficeDao officeDao;
+
 	@Autowired
-	private OfficeDao officeDao;
+	public OfficeServiceImpl(OfficeDao officeDao) {
+		this.officeDao = officeDao;
+	}
 
 	@Override
-	@Transactional(readOnly = false)
 	public OfficeTO addNewOffice(OfficeTO newOffice) {
-		OfficeTO office = OfficeMapper.toOfficeTO(officeDao.addNewOffice(OfficeMapper.toOfficeEntity(newOffice)));
-		return office;
+		OfficeEntity savedOffice = officeDao.save(toOfficeEntity(newOffice));
+		return toOfficeTO(savedOffice);
 	}
 
 	@Override
-	@Transactional(readOnly = false)
 	public void deleteOffice(OfficeTO removeOffice) {
-		officeDao.deleteOffice(OfficeMapper.toOfficeEntity(removeOffice));
+		officeDao.delete(toOfficeEntity(removeOffice));
 	}
 
 	@Override
-	@Transactional(readOnly = false)
-	public OfficeTO updateOfficeData(OfficeTO updatedOffice) {
-		OfficeEntity officeEntity = officeDao.updateOfficeData(OfficeMapper.toOfficeEntity(updatedOffice));
-		return OfficeMapper.toOfficeTO(officeEntity);
-
+	public OfficeTO updateOfficeData(OfficeTO officeToUpdate) {
+		OfficeEntity officeUpdated = officeDao.update(toOfficeEntity(officeToUpdate));
+		return toOfficeTO(officeUpdated);
 	}
-
 }

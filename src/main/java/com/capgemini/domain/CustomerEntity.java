@@ -1,7 +1,6 @@
 package com.capgemini.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +28,6 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class CustomerEntity extends AbstractEntity implements Serializable {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -43,9 +41,9 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "address_id")
 	private AddressCustomerEntity address;
-	
+
 	@OneToMany(targetEntity = LoanEntity.class, mappedBy = "customer", cascade = CascadeType.REMOVE)
-    private List<LoanEntity> loans = new ArrayList<>();
+	private List<LoanEntity> loans = new ArrayList<>();
 
 	@Column(nullable = false)
 	private Date birthDate;
@@ -134,5 +132,4 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 		this.loans = loans;
 	}
 
-	
 }

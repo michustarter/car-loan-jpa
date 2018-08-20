@@ -1,7 +1,6 @@
 package com.capgemini.mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.capgemini.domain.LoanEntity;
 import com.capgemini.domain.OfficeEntity;
@@ -9,14 +8,16 @@ import com.capgemini.to.LoanTO;
 import com.capgemini.to.OfficeTO;
 import com.capgemini.to.OfficeTO.OfficeTOBuilder;
 
+import static java.util.stream.Collectors.toList;
+
 public class OfficeMapper {
 
 	public static OfficeTO toOfficeTO(OfficeEntity officeEntity) {
 		if (officeEntity == null) {
 			return null;
 		}
-		List<LoanTO> loansFromTOs=LoanMapper.map2TOs(officeEntity.getLoansFrom());
-		List<LoanTO> loansToTOs=LoanMapper.map2TOs(officeEntity.getLoansTo());
+		List<LoanTO> loansFromTOs = LoanMapper.map2TOs(officeEntity.getLoansFrom());
+		List<LoanTO> loansToTOs = LoanMapper.map2TOs(officeEntity.getLoansTo());
 		return new OfficeTOBuilder()
 				.withId(officeEntity.getId())
 				.withAddress(AddressOfficeMapper.toAddressTO(officeEntity.getAddress()))
@@ -32,8 +33,8 @@ public class OfficeMapper {
 			return null;
 		}
 		OfficeEntity officeEntity = new OfficeEntity();
-		List<LoanEntity> loansFromEntities=LoanMapper.map2Entities(officeTo.getLoansFrom());
-		List<LoanEntity> loansToEntities=LoanMapper.map2Entities(officeTo.getLoansTo());
+		List<LoanEntity> loansFromEntities = LoanMapper.map2Entities(officeTo.getLoansFrom());
+		List<LoanEntity> loansToEntities = LoanMapper.map2Entities(officeTo.getLoansTo());
 		officeEntity.setId(officeTo.getId());
 		officeEntity.setAddress(AddressOfficeMapper.toAddressEntity(officeTo.getAddress()));
 		officeEntity.setPhoneNumber(officeTo.getPhoneNumber());
@@ -44,10 +45,10 @@ public class OfficeMapper {
 	}
 
 	public static List<OfficeTO> map2TOs(List<OfficeEntity> officeEntities) {
-		return officeEntities.stream().map(OfficeMapper::toOfficeTO).collect(Collectors.toList());
+		return officeEntities.stream().map(OfficeMapper::toOfficeTO).collect(toList());
 	}
 
 	public static List<OfficeEntity> map2Entities(List<OfficeTO> officeTOs) {
-		return officeTOs.stream().map(OfficeMapper::toOfficeEntity).collect(Collectors.toList());
+		return officeTOs.stream().map(OfficeMapper::toOfficeEntity).collect(toList());
 	}
 }

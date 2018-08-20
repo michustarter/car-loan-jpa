@@ -11,11 +11,11 @@ import javax.persistence.TemporalType;
 public abstract class AbstractEntity {
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created", nullable = true)
+	@Column(name = "created")
 	private Date created;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "updated", nullable = true)
+	@Column(name = "updated")
 	private Date updated;
 
 	public Date getCreated() {

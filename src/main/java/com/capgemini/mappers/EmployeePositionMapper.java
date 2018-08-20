@@ -1,11 +1,12 @@
 package com.capgemini.mappers;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.capgemini.domain.EmployeePositionEntity;
 import com.capgemini.to.EmployeePositionTO;
 import com.capgemini.to.EmployeePositionTO.EmployeePositionTOBuilder;
+
+import static java.util.stream.Collectors.toList;
 
 public class EmployeePositionMapper {
 
@@ -31,12 +32,11 @@ public class EmployeePositionMapper {
 
 	public static List<EmployeePositionTO> map2TOs(List<EmployeePositionEntity> emplPositionEntities) {
 		return emplPositionEntities.stream().map(EmployeePositionMapper::toEmployeePositionTO)
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
 
 	public static List<EmployeePositionEntity> map2Entities(List<EmployeePositionTO> emplPositionTOs) {
 		return emplPositionTOs.stream().map(EmployeePositionMapper::toEmployeePositionEntity)
-				.collect(Collectors.toList());
+				.collect(toList());
 	}
-
 }

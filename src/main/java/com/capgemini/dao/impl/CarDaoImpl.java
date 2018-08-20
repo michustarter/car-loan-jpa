@@ -16,34 +16,6 @@ import com.capgemini.domain.EmployeeEntity;
 public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 
 	@Override
-	public CarEntity addNewCar(CarEntity carEntity) {
-		return save(carEntity);
-	}
-	@Override
-	public void deleteCar(Long carId) {
-		delete(carId);
-	}
-
-	@Override
-	public CarEntity updateCarData(CarEntity carEntity) {
-		return update(carEntity);
-	}
-
-	@Override
-	public void assignToKeeper(CarEntity carEntity, EmployeeEntity employeeEntity) {
-		TypedQuery<EmployeeEntity> query = entityManager
-				.createQuery("select ee from EmployeeEntity ee where e.id = :id", EmployeeEntity.class);
-		query.setParameter("id", employeeEntity.getId());
-		try{
-		EmployeeEntity wantedEmployee = query.getSingleResult();
-		wantedEmployee.getCars().add(carEntity);
-		entityManager.merge(wantedEmployee);
-		} catch (NoResultException e) {
-		}
-
-	}
-
-	@Override
 	public List<CarEntity> findCarsByTypeAndBrand(String type, String brand) {
 		TypedQuery<CarEntity> query = entityManager.createQuery(
 				"select car from CarEntity car where car.type = :type and car.brand = :brand", CarEntity.class);
@@ -59,5 +31,4 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 		query.setParameter("employee_id", keeperEntity.getId());
 		return query.getResultList();
 	}
-
 }

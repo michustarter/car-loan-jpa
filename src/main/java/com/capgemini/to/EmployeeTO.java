@@ -12,22 +12,19 @@ public class EmployeeTO {
 	private String firstName;
 	private String lastName;
 	private Date birthDate;
-	private List<CarTO> cars=new ArrayList<>();
+	private List<CarTO> cars = new ArrayList<>();
 
-	public EmployeeTO() {
-		super();
-	}
+	public EmployeeTO() {}
 
 	public EmployeeTO(Long id, OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
 			Date birthDate, List<CarTO> cars) {
-		super();
+		this.id = id;
 		this.office = office;
 		this.employeePosition = employeePosition;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.birthDate = birthDate;
 		this.cars = cars;
-		this.id = id;
 	}
 
 	public Long getId() {
@@ -99,9 +96,7 @@ public class EmployeeTO {
 		private Date birthDate;
 		private List<CarTO> cars = new ArrayList<>();
 
-		public EmployeeTOBuilder() {
-			super();
-		}
+		public EmployeeTOBuilder() {}
 
 		public EmployeeTOBuilder withId(Long id) {
 			this.id = id;
@@ -144,14 +139,12 @@ public class EmployeeTO {
 		}
 
 		public EmployeeTO build() {
-			checkBeforeBuild(office, employeePosition, firstName, lastName, birthDate, cars);
+			checkBeforeBuild(firstName, lastName, birthDate);
 			return new EmployeeTO(id, office, employeePosition, firstName, lastName, birthDate, cars);
 		}
 
-		private void checkBeforeBuild(OfficeTO office, EmployeePositionTO employeePosition, String firstName,
-				String lastName, Date birthDate, List<CarTO> cars) {
-			if ( firstName == null || firstName.isEmpty()
-					|| lastName == null || lastName.isEmpty() || birthDate == null) {
+		private void checkBeforeBuild(String firstName, String lastName, Date birthDate) {
+			if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || birthDate == null) {
 				throw new RuntimeException("Incorrect employee to be created");
 			}
 		}
@@ -223,5 +216,4 @@ public class EmployeeTO {
 			return false;
 		return true;
 	}
-
 }
