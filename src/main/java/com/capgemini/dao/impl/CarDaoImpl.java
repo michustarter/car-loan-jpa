@@ -3,6 +3,7 @@ package com.capgemini.dao.impl;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -53,9 +54,9 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 
 	@Override
 	public List<CarEntity> findCarsByKeeper(EmployeeEntity keeperEntity) {
-		TypedQuery<CarEntity> query = entityManager
-				.createQuery("select ee.cars from EmployeeEntity ee where ee.id = :employee", CarEntity.class);
-		query.setParameter("employee", keeperEntity.getId());
+		Query query = entityManager
+				.createQuery("select ee.cars from EmployeeEntity ee where ee.id = :employee_id");
+		query.setParameter("employee_id", keeperEntity.getId());
 		return query.getResultList();
 	}
 

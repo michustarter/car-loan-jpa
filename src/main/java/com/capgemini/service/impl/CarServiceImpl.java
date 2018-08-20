@@ -16,6 +16,7 @@ import com.capgemini.to.CarTO;
 import com.capgemini.to.EmployeeTO;
 
 @Service
+@Transactional
 public class CarServiceImpl implements CarService {
 
 	@Autowired
@@ -42,7 +43,6 @@ public class CarServiceImpl implements CarService {
 	}
 	
 	@Override
-	@Transactional
 	public CarTO findCarById(Long carId) {
 		return CarMapper.toCarTO(carDao.findOne(carId));
 	}

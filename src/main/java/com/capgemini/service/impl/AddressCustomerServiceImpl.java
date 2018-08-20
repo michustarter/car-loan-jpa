@@ -1,6 +1,7 @@
 package com.capgemini.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.capgemini.dao.AddressCustomerDao;
 import com.capgemini.domain.AddressCustomerEntity;
@@ -8,6 +9,7 @@ import com.capgemini.mappers.AddressCustomerMapper;
 import com.capgemini.service.AddressCustomerService;
 import com.capgemini.to.AddressTO;
 
+@Service
 public class AddressCustomerServiceImpl implements AddressCustomerService {
 
 	private AddressCustomerDao addressCustomerDao;

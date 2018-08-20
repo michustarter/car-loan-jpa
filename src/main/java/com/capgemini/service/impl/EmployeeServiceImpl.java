@@ -50,30 +50,34 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 		
 	@Override
-	public EmployeeTO updateEmployeeData(EmployeeTO updateEmployee) {
-		EmployeeEntity employee = employeeDao.updateEmployeeData(EmployeeMapper.toEmployeeEntity(updateEmployee));
-		return EmployeeMapper.toEmployeeTO(employee);
+	public EmployeeTO updateEmployeeData(EmployeeTO employee) {
+		if(employee.getId()==null) {
+			employeeDao.save(EmployeeMapper.toEmployeeEntity(employee));
+		}
+	
+		EmployeeEntity employeeEntity = employeeDao.update(EmployeeMapper.toEmployeeEntity(employee));
+		return EmployeeMapper.toEmployeeTO(employeeEntity);
 	}
 
 	@Override
-	public EmployeeTO deleteEmployeeFromOffice(Long officeId, Long employeeId) {
-		 EmployeeEntity employeeEntity = employeeDao.deleteEmployeeFromOffice(employeeId);
-	        return EmployeeMapper.toEmployeeTO(employeeEntity);
+	public EmployeeTO deleteEmployeeFromOffice(EmployeeTO employee, OfficeTO office) {
+		
+		if(employee.getId()!=null && office.getId()!=null){
+		employee.setOffice(null);
+		employee=updateEmployeeData(employee);
+		}
+		return employee;
 	}
 	
 	@Override
 	public EmployeeTO setOfficeToEmployee(EmployeeTO employee, OfficeTO office) {
 		
-		if(employee.getId()==null) {
-			employeeDao.save(EmployeeMapper.toEmployeeEntity(employee));
-		}
-		if(office.getId()==null) {
-			officeDao.save(OfficeMapper.toOfficeEntity(office));
-		}
+		if(employee.getId()!=null && office.getId()!=null){
 		employee.setOffice(office);
 		employee=updateEmployeeData(employee);
-		
+		}
 		return employee;
+		 
 		
 	}
 	@Override

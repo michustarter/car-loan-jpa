@@ -29,23 +29,6 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Long> implement
 		return update(updateEmployee);
 	}
 	
-	
-
-	@Override
-	public EmployeeEntity deleteEmployeeFromOffice(Long employeeId) {
-		TypedQuery<EmployeeEntity> queryEmployee = entityManager
-				.createQuery("select ee from EmployeeEntity ee where ee.id = :employeeId", EmployeeEntity.class);
-		queryEmployee.setParameter("employeeId", employeeId);
-
-		try {
-
-			EmployeeEntity employeeEntity = queryEmployee.getSingleResult();
-			employeeEntity.setOffice(null);
-			return entityManager.merge(employeeEntity);
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
 
 	@Override
 	public List<EmployeeEntity> findOfficeEmployees(Long officeId) {

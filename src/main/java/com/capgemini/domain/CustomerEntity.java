@@ -3,6 +3,7 @@ package com.capgemini.domain;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,7 +48,7 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
     private List<LoanEntity> loans = new ArrayList<>();
 
 	@Column(nullable = false)
-	private Timestamp birthDate;
+	private Date birthDate;
 
 	@Column(nullable = false, length = 12)
 	private String phoneNumber;
@@ -93,11 +94,11 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 		this.address = address;
 	}
 
-	public Timestamp getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Timestamp birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 

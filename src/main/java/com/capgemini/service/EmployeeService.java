@@ -15,7 +15,7 @@ public interface EmployeeService {
 	
 EmployeeTO updateEmployeeData(EmployeeTO updateEmployee);
 	
-	EmployeeTO deleteEmployeeFromOffice(Long officeId, Long employeeId);
+	EmployeeTO deleteEmployeeFromOffice(EmployeeTO employee, OfficeTO office);
 	
 	
 	EmployeeTO setOfficeToEmployee(EmployeeTO employee, OfficeTO office);

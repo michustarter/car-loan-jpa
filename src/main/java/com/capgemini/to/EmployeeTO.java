@@ -1,10 +1,8 @@
 package com.capgemini.to;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import org.springframework.util.CollectionUtils;
 
 public class EmployeeTO {
 
@@ -13,7 +11,7 @@ public class EmployeeTO {
 	private EmployeePositionTO employeePosition;
 	private String firstName;
 	private String lastName;
-	private Timestamp birthDate;
+	private Date birthDate;
 	private List<CarTO> cars=new ArrayList<>();
 
 	public EmployeeTO() {
@@ -21,7 +19,7 @@ public class EmployeeTO {
 	}
 
 	public EmployeeTO(Long id, OfficeTO office, EmployeePositionTO employeePosition, String firstName, String lastName,
-			Timestamp birthDate, List<CarTO> cars) {
+			Date birthDate, List<CarTO> cars) {
 		super();
 		this.office = office;
 		this.employeePosition = employeePosition;
@@ -72,11 +70,11 @@ public class EmployeeTO {
 		this.lastName = lastName;
 	}
 
-	public Timestamp getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Timestamp birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -98,7 +96,7 @@ public class EmployeeTO {
 		private EmployeePositionTO employeePosition;
 		private String firstName;
 		private String lastName;
-		private Timestamp birthDate;
+		private Date birthDate;
 		private List<CarTO> cars = new ArrayList<>();
 
 		public EmployeeTOBuilder() {
@@ -130,7 +128,7 @@ public class EmployeeTO {
 			return this;
 		}
 
-		public EmployeeTOBuilder withBirthDate(Timestamp birthDate) {
+		public EmployeeTOBuilder withBirthDate(Date birthDate) {
 			this.birthDate = birthDate;
 			return this;
 		}
@@ -151,9 +149,9 @@ public class EmployeeTO {
 		}
 
 		private void checkBeforeBuild(OfficeTO office, EmployeePositionTO employeePosition, String firstName,
-				String lastName, Timestamp birthDate, List<CarTO> cars) {
-			if (office == null || employeePosition == null || firstName == null || firstName.isEmpty()
-					|| lastName == null || lastName.isEmpty() || birthDate == null || CollectionUtils.isEmpty(cars)) {
+				String lastName, Date birthDate, List<CarTO> cars) {
+			if ( firstName == null || firstName.isEmpty()
+					|| lastName == null || lastName.isEmpty() || birthDate == null) {
 				throw new RuntimeException("Incorrect employee to be created");
 			}
 		}

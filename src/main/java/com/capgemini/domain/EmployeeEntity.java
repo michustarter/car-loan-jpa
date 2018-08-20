@@ -1,8 +1,8 @@
 package com.capgemini.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -48,7 +48,7 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	private String lastName;
 
 	@Column(nullable = false)
-	private Timestamp birthDate;
+	private Date birthDate;
 
 	@ManyToMany
 	@JoinTable(name = "keeper", joinColumns = { @JoinColumn(name = "employee_id") }, inverseJoinColumns = {
@@ -110,12 +110,12 @@ public class EmployeeEntity extends AbstractEntity implements Serializable {
 	}
 
 
-	public Timestamp getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
 
-	public void setBirthDate(Timestamp birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 

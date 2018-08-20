@@ -4,8 +4,6 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.util.CollectionUtils;
-
 public class CarTO {
 
 	private Long id;
@@ -206,7 +204,7 @@ public class CarTO {
 				int engineCapacity, int power, int mileage, List<LoanTO> loans) {
 			if (type == null || type.isEmpty() || brand == null || brand.isEmpty() || model == null || model.isEmpty()
 					|| productionYear == null || color == null || color.isEmpty() || engineCapacity <= 0 || power <= 0
-					|| mileage < 0 || CollectionUtils.isEmpty(loans)) {
+					|| mileage < 0) {
 				throw new RuntimeException("Incorrect car to be created");
 			}
 		}

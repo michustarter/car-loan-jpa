@@ -1,10 +1,8 @@
 package com.capgemini.to;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import org.springframework.util.CollectionUtils;
 
 public class CustomerTO {
 
@@ -13,7 +11,7 @@ public class CustomerTO {
 	private String lastName;
 	private AddressTO address;
 	private List<LoanTO> loans=new ArrayList<>();
-	private Timestamp birthDate;
+	private Date birthDate;
 	private String phoneNumber;
 	private String creditCardNumber;
 	private String mail;
@@ -22,7 +20,7 @@ public class CustomerTO {
 		super();
 	}
 
-	public CustomerTO(Long id, String firstName, String lastName, AddressTO address,List<LoanTO> loans, Timestamp birthDate, String phoneNumber,
+	public CustomerTO(Long id, String firstName, String lastName, AddressTO address,List<LoanTO> loans, Date birthDate, String phoneNumber,
 			String creditCardNumber, String mail) {
 		super();
 		this.id=id;
@@ -67,11 +65,11 @@ public class CustomerTO {
 		this.address = address;
 	}
 
-	public Timestamp getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Timestamp birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -118,7 +116,7 @@ public class CustomerTO {
 		private String lastName;
 		private AddressTO address;
 		private List<LoanTO> loans=new ArrayList<>();
-		private Timestamp birthDate;
+		private Date birthDate;
 		private String phoneNumber;
 		private String creditCardNumber;
 		private String mail;
@@ -156,7 +154,7 @@ public class CustomerTO {
 			return this;
 		}
 
-		public CustomerTOBuilder withBirthDate(Timestamp birthDate) {
+		public CustomerTOBuilder withBirthDate(Date birthDate) {
 			this.birthDate = birthDate;
 			return this;
 		}
@@ -182,11 +180,11 @@ public class CustomerTO {
 
 		}
 
-		private void checkBeforeBuild(String firstName, String lastName, AddressTO address, List<LoanTO> loans,Timestamp birthDate,
+		private void checkBeforeBuild(String firstName, String lastName, AddressTO address, List<LoanTO> loans,Date birthDate,
 				String phoneNumber, String creditCardNumber, String mail) {
 			if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || address == null
 					|| birthDate == null || phoneNumber == null || phoneNumber.length() != 12
-					|| creditCardNumber == null || creditCardNumber.length() != 16 || mail == null || mail.isEmpty()|| CollectionUtils.isEmpty(loans)) {
+					|| creditCardNumber == null || creditCardNumber.length() != 16 || mail == null || mail.isEmpty()) {
 				throw new RuntimeException("Incorrect customer to be created");
 			}
 		}

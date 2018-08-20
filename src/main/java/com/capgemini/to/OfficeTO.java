@@ -3,8 +3,6 @@ package com.capgemini.to;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.util.CollectionUtils;
-
 public class OfficeTO {
 
 	private Long id;
@@ -146,7 +144,7 @@ public class OfficeTO {
 		}
 
 		private void checkBeforeBuild(AddressTO address, String phoneNumber, String mail) {
-			if (address == null || phoneNumber == null || mail == null|| CollectionUtils.isEmpty(loansFrom)|| CollectionUtils.isEmpty(loansTo)) {
+			if (address == null || phoneNumber == null || mail == null) {
 				throw new RuntimeException("Incorrect office to be created");
 			}
 		}
