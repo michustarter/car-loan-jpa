@@ -20,7 +20,7 @@ public class CustomerMapper {
 				.withId(customerEntity.getId())
 				.withFirstName(customerEntity.getFirstName())
 				.withLastName(customerEntity.getLastName())
-				.withAddress(AddressMapper.toAddressTO(customerEntity.getAddress()))
+				.withAddress(AddressCustomerMapper.toAddressTO(customerEntity.getAddress()))
 				.withLoans(loansTOs)
 				.withBirthDate(customerEntity.getBirthDate())
 				.withPhoneNumber(customerEntity.getPhoneNumber())
@@ -38,7 +38,7 @@ public class CustomerMapper {
 		customerEntity.setId(customerTO.getId());
 		customerEntity.setFirstName(customerTO.getFirstName());
 		customerEntity.setLastName(customerTO.getLastName());
-		customerEntity.setAddress(AddressMapper.toAddressEntity(customerTO.getAddress()));
+		customerEntity.setAddress(AddressCustomerMapper.toAddressEntity(customerTO.getAddress()));
 		customerEntity.setLoans(loansToEntity);
 		customerEntity.setBirthDate(customerTO.getBirthDate());
 		customerEntity.setPhoneNumber(customerTO.getPhoneNumber());

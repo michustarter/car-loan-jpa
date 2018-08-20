@@ -34,7 +34,7 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 
 	@OneToOne
 	@JoinColumn(name="address_id")
-	private AddressEntity address;
+	private AddressOfficeEntity address;
 
 	@Column(nullable = false, length = 12)
 	private String phoneNumber;
@@ -59,11 +59,11 @@ public class OfficeEntity extends AbstractEntity implements Serializable {
 		this.id = id;
 	}
 
-	public AddressEntity getAddress() {
+	public AddressOfficeEntity getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(AddressOfficeEntity address) {
 		this.address = address;
 	}
 

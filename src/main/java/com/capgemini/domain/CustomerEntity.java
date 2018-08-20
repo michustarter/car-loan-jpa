@@ -41,7 +41,7 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "address_id")
-	private AddressEntity address;
+	private AddressCustomerEntity address;
 	
 	@OneToMany(targetEntity = LoanEntity.class, mappedBy = "customer", cascade = CascadeType.REMOVE)
     private List<LoanEntity> loans = new ArrayList<>();
@@ -85,11 +85,11 @@ public class CustomerEntity extends AbstractEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public AddressEntity getAddress() {
+	public AddressCustomerEntity getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(AddressCustomerEntity address) {
 		this.address = address;
 	}
 

@@ -10,10 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "address")
+@Table(name = "address_customer")
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
-public class AddressEntity  implements Serializable {
+public class AddressCustomerEntity  implements Serializable {
 
 
 	/**
@@ -34,7 +34,7 @@ public class AddressEntity  implements Serializable {
 	@Column(nullable = false, length = 50)
 	private String city;
 
-	public AddressEntity() {
+	public AddressCustomerEntity() {
 	}
 
 	public Long getId() {
@@ -93,7 +93,7 @@ public class AddressEntity  implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AddressEntity other = (AddressEntity) obj;
+		AddressCustomerEntity other = (AddressCustomerEntity) obj;
 		if (city == null) {
 			if (other.city != null)
 				return false;

@@ -19,7 +19,7 @@ public class OfficeMapper {
 		List<LoanTO> loansToTOs=LoanMapper.map2TOs(officeEntity.getLoansTo());
 		return new OfficeTOBuilder()
 				.withId(officeEntity.getId())
-				.withAddress(AddressMapper.toAddressTO(officeEntity.getAddress()))
+				.withAddress(AddressOfficeMapper.toAddressTO(officeEntity.getAddress()))
 				.withPhoneNumber(officeEntity.getPhoneNumber())
 				.withMail(officeEntity.getMail())
 				.withLoansFrom(loansFromTOs)
@@ -35,7 +35,7 @@ public class OfficeMapper {
 		List<LoanEntity> loansFromEntities=LoanMapper.map2Entities(officeTo.getLoansFrom());
 		List<LoanEntity> loansToEntities=LoanMapper.map2Entities(officeTo.getLoansTo());
 		officeEntity.setId(officeTo.getId());
-		officeEntity.setAddress(AddressMapper.toAddressEntity(officeTo.getAddress()));
+		officeEntity.setAddress(AddressOfficeMapper.toAddressEntity(officeTo.getAddress()));
 		officeEntity.setPhoneNumber(officeTo.getPhoneNumber());
 		officeEntity.setMail(officeEntity.getMail());
 		officeEntity.setLoansFrom(loansFromEntities);
