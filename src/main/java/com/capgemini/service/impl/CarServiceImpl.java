@@ -20,7 +20,11 @@ import com.capgemini.service.CarService;
 import com.capgemini.to.CarTO;
 import com.capgemini.to.EmployeeTO;
 import com.capgemini.util.NotFoundException;
-
+/**
+ * Klasa serwisowa zawierająca metody wykonujące operację na obiektach samochodu typu DTO
+ * @author MRATAJCZ
+ *
+ */
 @Service
 public class CarServiceImpl implements CarService {
 
@@ -57,7 +61,10 @@ public class CarServiceImpl implements CarService {
 	public CarTO findCarById(Long carId) {
 		return toCarTO(carDao.findOne(carId));
 	}
-
+/**
+ * Metoda przyjmuje dwa parametry typu TO - car oraz employee.
+ * Metoda przypisuje car do employee, czyli employee jest opiekunem tego samochodu.
+ */
 	@Override
 	@Transactional
 	public void assignToKeeper(CarTO carTO, EmployeeTO employeeTO) {
@@ -79,7 +86,10 @@ public class CarServiceImpl implements CarService {
 	public List<CarTO> findCarsByTypeAndBrand(String type, String brand) {
 		return map2TOs(carDao.findCarsByTypeAndBrand(type, brand));
 	}
-
+/**
+ * Metoda przyjmuje parametr keeperTO.
+ *Tworzyli listę, do której dodaje samochody, których opiekunem jest podany pracownik (keeperTO)
+ */
 	@Override
 	public List<CarTO> findCarsByKeeper(EmployeeTO keeperTO) {
 		List<CarEntity> cars = carDao.findCarsByKeeper(EmployeeMapper.toEmployeeEntity(keeperTO));

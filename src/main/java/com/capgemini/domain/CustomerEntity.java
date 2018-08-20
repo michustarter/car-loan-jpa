@@ -28,6 +28,8 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class CustomerEntity extends AbstractEntity implements Serializable {
 
+	private static final long serialVersionUID = -4931663921358032018L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

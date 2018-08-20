@@ -27,6 +27,8 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class OfficeEntity extends AbstractEntity implements Serializable {
 
+	private static final long serialVersionUID = -2091469037896931156L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;

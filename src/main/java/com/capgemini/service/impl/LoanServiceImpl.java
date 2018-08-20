@@ -9,7 +9,11 @@ import com.capgemini.dao.LoanDao;
 import com.capgemini.mappers.CarMapper;
 import com.capgemini.service.LoanService;
 import com.capgemini.to.CarTO;
-
+/**
+ * Klasa serwisowa reprezentująca wypozyczenia samochodow
+ * @author MRATAJCZ
+ *
+ */
 @Service
 public class LoanServiceImpl implements LoanService {
 

@@ -2,6 +2,7 @@ package com.capgemini.service;
 
 import java.util.List;
 
+import com.capgemini.to.CarTO;
 import com.capgemini.to.EmployeeTO;
 import com.capgemini.to.OfficeTO;
 
@@ -19,8 +20,8 @@ public interface EmployeeService {
 
 	EmployeeTO setOfficeToEmployee(EmployeeTO employee, OfficeTO office);
 
-	List<EmployeeTO> findOfficeEmployees(Long officeId);
+	List<EmployeeTO> findOfficeEmployees(OfficeTO officeTO);
 
-	List<EmployeeTO> findCarKeepersFromOffice(Long officeId, Long carId);
+	List<EmployeeTO> findCarKeepersFromOffice(OfficeTO officeTO, CarTO carTO);
 	
 }

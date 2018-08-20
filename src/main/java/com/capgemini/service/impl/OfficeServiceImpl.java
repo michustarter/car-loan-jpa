@@ -11,7 +11,12 @@ import com.capgemini.to.OfficeTO;
 
 import static com.capgemini.mappers.OfficeMapper.toOfficeEntity;
 import static com.capgemini.mappers.OfficeMapper.toOfficeTO;
-
+/**
+ * Klasa serwisowa reprezentująca oddzial wypozyczalni, znajdują sie w niej typowe 
+ * metody zwiazane z dodawaniem, usuwaniem i aktualizowaniem oddzialu wypozyczlani.
+ * @author MRATAJCZ
+ *
+ */
 @Service
 @Transactional
 public class OfficeServiceImpl implements OfficeService {

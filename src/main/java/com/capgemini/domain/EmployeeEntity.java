@@ -28,6 +28,7 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class EmployeeEntity extends AbstractEntity implements Serializable {
 
+	private static final long serialVersionUID = 517571374583888292L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

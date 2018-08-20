@@ -10,13 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import com.capgemini.dao.EmployeeDao;
 import com.capgemini.domain.EmployeeEntity;
 import com.capgemini.service.EmployeeService;
+import com.capgemini.to.CarTO;
 import com.capgemini.to.EmployeeTO;
 import com.capgemini.to.OfficeTO;
 
 import static com.capgemini.mappers.EmployeeMapper.map2TOs;
 import static com.capgemini.mappers.EmployeeMapper.toEmployeeEntity;
 import static com.capgemini.mappers.EmployeeMapper.toEmployeeTO;
-
+/**
+ * Klasa serwisowa - zawiera metody operujące na obiektach reprezentujących pracownika wypozyczalni
+ * @author MRATAJCZ
+ *
+ */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -56,7 +61,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return toEmployeeTO(updatedEmployee);
 		}
 	}
-
+/**
+ * Metoda jako parametr przyjmuje pracownika,
+ * nastepnie usuwa z jego danych oddział wypozyczalni,
+ *  w którym pracował, ustawiając tę wartość jako null.
+ */
 	@Override
 	@Transactional
 	public EmployeeTO deleteEmployeeFromOffice(EmployeeTO employee) {
@@ -66,7 +75,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setOffice(null);
 		return update(employee);
 	}
-
+/**
+ * Metoda przyjmuje dwa parametry - pracownika oraz oddział wypozyczalni.
+ * Przypisuje danemu pracownikowi przekazany oddział jako jego miejsce pracy.
+ */
 	@Override
 	@Transactional
 	public EmployeeTO setOfficeToEmployee(EmployeeTO employee, OfficeTO office) {
@@ -76,15 +88,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return employee;
 	}
-
+/**
+ * Metoda w której przekazywany jest oddzial wypozyczalni i wyszukiwani są pracownicy pracujący w tym oddziale
+ */
 	@Override
-	public List<EmployeeTO> findOfficeEmployees(Long officeId) {
-		return map2TOs(employeeDao.findOfficeEmployees(officeId));
+	public List<EmployeeTO> findOfficeEmployees(OfficeTO office) {
+		return map2TOs(employeeDao.findOfficeEmployees(office.getId()));
 	}
-
+/**
+ * Metoda zwracająca listę opiekunów danego samochodu z danego oddziału wypozyczalni
+ */
 	@Override
-	public List<EmployeeTO> findCarKeepersFromOffice(Long officeId, Long carId) {
-		  return map2TOs(employeeDao.findCarKeepersFromOffice(officeId, carId));
+	public List<EmployeeTO> findCarKeepersFromOffice(OfficeTO office, CarTO car) {
+		  return map2TOs(employeeDao.findCarKeepersFromOffice(office.getId(), car.getId()));
 	}
 
 }

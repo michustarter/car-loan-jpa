@@ -2,7 +2,6 @@ package com.capgemini.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
@@ -24,6 +23,7 @@ public class CarDaoImpl extends AbstractDao<CarEntity, Long> implements CarDao {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CarEntity> findCarsByKeeper(EmployeeEntity keeperEntity) {
 		Query query = entityManager

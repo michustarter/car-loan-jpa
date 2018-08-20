@@ -26,6 +26,8 @@ import com.capgemini.listeners.UpdateEntityListener;
 @EntityListeners({ CreateEntityListener.class, UpdateEntityListener.class })
 public class CarEntity extends AbstractEntity implements Serializable {
 
+	private static final long serialVersionUID = -188994136370839191L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -138,83 +140,6 @@ public class CarEntity extends AbstractEntity implements Serializable {
 
 	public void setLoans(List<LoanEntity> loans) {
 		this.loans = loans;
-	}
-
-	@Override
-	public String toString() {
-		return "CarEntity [id=" + id + ", type=" + type + ", brand=" + brand + ", model=" + model + ", productionYear="
-				+ productionYear + ", color=" + color + ", engineCapacity=" + engineCapacity + ", power=" + power
-				+ ", mileage=" + mileage + ", loans=" + loans + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + engineCapacity;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((loans == null) ? 0 : loans.hashCode());
-		result = prime * result + mileage;
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + power;
-		result = prime * result + ((productionYear == null) ? 0 : productionYear.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CarEntity other = (CarEntity) obj;
-		if (brand == null) {
-			if (other.brand != null)
-				return false;
-		} else if (!brand.equals(other.brand))
-			return false;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (engineCapacity != other.engineCapacity)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (loans == null) {
-			if (other.loans != null)
-				return false;
-		} else if (!loans.equals(other.loans))
-			return false;
-		if (mileage != other.mileage)
-			return false;
-		if (model == null) {
-			if (other.model != null)
-				return false;
-		} else if (!model.equals(other.model))
-			return false;
-		if (power != other.power)
-			return false;
-		if (productionYear == null) {
-			if (other.productionYear != null)
-				return false;
-		} else if (!productionYear.equals(other.productionYear))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		return true;
 	}
 
 }

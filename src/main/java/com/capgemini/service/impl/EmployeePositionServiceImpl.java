@@ -9,7 +9,11 @@ import com.capgemini.domain.EmployeePositionEntity;
 import com.capgemini.mappers.EmployeePositionMapper;
 import com.capgemini.service.EmployeePositionService;
 import com.capgemini.to.EmployeePositionTO;
-
+/**
+ * Klasa serwisowa zawierająca metody dotyczące stanowiska pracownika wypożyczalni
+ * @author MRATAJCZ
+ *
+ */
 @Service
 @Transactional
 public class EmployeePositionServiceImpl implements EmployeePositionService {

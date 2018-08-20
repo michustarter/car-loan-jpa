@@ -14,8 +14,8 @@ public class AddressCustomerDaoImpl extends AbstractDao<AddressCustomerEntity, L
     @Override
     public AddressCustomerEntity addNewAddress(AddressCustomerEntity newAddress) {
         TypedQuery<AddressCustomerEntity> query = entityManager.createQuery(
-                "select a from AddressCustomerEntity a where a.street = :street " +
-                        " and a.postCode=:postCode and a.city=:city ", AddressCustomerEntity.class);
+                "select ac from AddressCustomerEntity ac where ac.street = :street " +
+                        " and ac.postCode=:postCode and ac.city=:city ", AddressCustomerEntity.class);
         query.setParameter("street", newAddress.getStreet());
         query.setParameter("postCode", newAddress.getPostCode());
         query.setParameter("city",newAddress.getCity());
