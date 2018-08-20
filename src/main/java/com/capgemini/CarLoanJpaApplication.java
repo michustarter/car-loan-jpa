@@ -10,7 +10,6 @@ public class CarLoanJpaApplication {
 		// Uncomment line below to use mysql database (default database name = jstk, user = jstk, pass = jstk)
 		// you can change this in application-mysql.properties
 		 System.setProperty("spring.profiles.active", "mysql");
-		// System.setProperty("spring.profiles.active","hsql");
 
 		SpringApplication.run(CarLoanJpaApplication.class, args);
 	}

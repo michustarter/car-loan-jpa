@@ -5,18 +5,18 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
-import com.capgemini.dao.AddressDao;
-import com.capgemini.domain.AddressEntity;
+import com.capgemini.dao.AddressOfficeDao;
+import com.capgemini.domain.AddressOfficeEntity;
 
 @Repository
-public class AddressDaoImpl extends AbstractDao<AddressEntity, Long> implements AddressDao {
+public class AddressOfficeDaoImpl extends AbstractDao<AddressOfficeEntity, Long> implements AddressOfficeDao {
 
 
     @Override
-    public AddressEntity addNewAddress(AddressEntity newAddress) {
-        TypedQuery<AddressEntity> query = entityManager.createQuery(
-                "select a from AddressEntity a where a.street = :street " +
-                        " and a.postCode=:postCode and a.city=:city ", AddressEntity.class);
+    public AddressOfficeEntity addNewAddress(AddressOfficeEntity newAddress) {
+        TypedQuery<AddressOfficeEntity> query = entityManager.createQuery(
+                "select a from AddressOfficeEntity a where a.street = :street " +
+                        " and a.postCode=:postCode and a.city=:city ", AddressOfficeEntity.class);
         query.setParameter("street", newAddress.getStreet());
         query.setParameter("postCode", newAddress.getPostCode());
         query.setParameter("city",newAddress.getCity());

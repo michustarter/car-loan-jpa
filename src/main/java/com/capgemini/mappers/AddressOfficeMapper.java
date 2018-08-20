@@ -3,7 +3,6 @@ package com.capgemini.mappers;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.capgemini.domain.AddressEntity;
 import com.capgemini.domain.AddressOfficeEntity;
 import com.capgemini.to.AddressTO;
 import com.capgemini.to.AddressTO.AddressTOBuilder;
