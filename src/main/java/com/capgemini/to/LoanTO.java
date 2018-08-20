@@ -1,6 +1,6 @@
 package com.capgemini.to;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class LoanTO {
 
@@ -9,15 +9,15 @@ public class LoanTO {
 	private CarTO car;
 	private OfficeTO officeFrom;
 	private OfficeTO officeTo;
-	private Timestamp rentalDate;
-	private Timestamp returnDate;
+	private Date rentalDate;
+	private Date returnDate;
 	private int loanPrice;
 
 	public LoanTO() {
 	}
 
-	public LoanTO(Long id, CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Timestamp rentalDate,
-			Timestamp returnDate, int loanPrice) {
+	public LoanTO(Long id, CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo, Date rentalDate,
+			Date returnDate, int loanPrice) {
 		super();
 		this.customer = customer;
 		this.car = car;
@@ -69,19 +69,19 @@ public class LoanTO {
 		this.officeTo = officeTo;
 	}
 
-	public Timestamp getRentalDate() {
+	public Date getRentalDate() {
 		return rentalDate;
 	}
 
-	public void setRentalDate(Timestamp rentalDate) {
+	public void setRentalDate(Date rentalDate) {
 		this.rentalDate = rentalDate;
 	}
 
-	public Timestamp getReturnDate() {
+	public Date getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(Timestamp returnDate) {
+	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
 
@@ -103,8 +103,8 @@ public class LoanTO {
 		private CarTO car;
 		private OfficeTO officeFrom;
 		private OfficeTO officeTo;
-		private Timestamp rentalDate;
-		private Timestamp returnDate;
+		private Date rentalDate;
+		private Date returnDate;
 		private int loanPrice;
 
 		public LoanTOBuilder() {
@@ -135,12 +135,12 @@ public class LoanTO {
 			return this;
 		}
 
-		public LoanTOBuilder withRentalDate(Timestamp rentalDate) {
+		public LoanTOBuilder withRentalDate(Date rentalDate) {
 			this.rentalDate = rentalDate;
 			return this;
 		}
 
-		public LoanTOBuilder withReturnDate(Timestamp returnDate) {
+		public LoanTOBuilder withReturnDate(Date returnDate) {
 			this.returnDate = returnDate;
 			return this;
 		}
@@ -156,7 +156,7 @@ public class LoanTO {
 		}
 
 		private void checkBeforeBuild(CustomerTO customer, CarTO car, OfficeTO officeFrom, OfficeTO officeTo,
-				Timestamp rentalDate, Timestamp returnDate, int loanPrice) {
+				Date rentalDate, Date returnDate, int loanPrice) {
 			if (customer == null || car == null || officeFrom == null || officeTo == null || rentalDate == null
 					|| returnDate == null || rentalDate.after(returnDate) || loanPrice <= 0) {
 				throw new RuntimeException("Incorrect loan to be created");

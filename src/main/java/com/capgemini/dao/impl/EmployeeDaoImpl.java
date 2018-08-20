@@ -32,7 +32,7 @@ public class EmployeeDaoImpl extends AbstractDao<EmployeeEntity, Long> implement
 		TypedQuery<EmployeeEntity> query = entityManager
 				.createQuery(
 						"select ee " + "from EmployeeEntity ee inner join ee.office of "
-								+ "inner join ee.cars c where of.id= :officeId" + "and c.id= :carId",
+								+ "inner join ee.cars c where " + "of.id= :officeId and c.id= :carId",
 						EmployeeEntity.class);
 		query.setParameter("officeId", officeId);
 		query.setParameter("carId", carId);

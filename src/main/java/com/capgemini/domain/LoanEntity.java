@@ -1,7 +1,7 @@
 package com.capgemini.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,10 +40,10 @@ public class LoanEntity extends AbstractEntity implements Serializable {
 	private OfficeEntity officeTo;
 
 	@Column(nullable = false)
-	private Timestamp rentalDate;
+	private Date rentalDate;
 
 	@Column
-	private Timestamp returnDate;
+	private Date returnDate;
 
 	@Column(nullable = false)
 	private int loanPrice;
@@ -91,19 +91,19 @@ public class LoanEntity extends AbstractEntity implements Serializable {
 		this.officeTo = officeTo;
 	}
 
-	public Timestamp getRentalDate() {
+	public Date getRentalDate() {
 		return rentalDate;
 	}
 
-	public void setRentalDate(Timestamp rentalDate) {
+	public void setRentalDate(Date rentalDate) {
 		this.rentalDate = rentalDate;
 	}
 
-	public Timestamp getReturnDate() {
+	public Date getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(Timestamp returnDate) {
+	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
 	}
 
