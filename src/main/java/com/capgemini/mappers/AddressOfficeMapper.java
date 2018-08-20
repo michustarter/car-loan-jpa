@@ -1,6 +1,6 @@
 package com.capgemini.mappers;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.capgemini.domain.AddressOfficeEntity;
@@ -32,18 +32,18 @@ public class AddressOfficeMapper {
 
 	}
 
-	public static Set<AddressTO> map2TOs(Set<AddressOfficeEntity> addressEntities) {
+	public static List<AddressTO> map2TOs(List<AddressOfficeEntity> addressEntities) {
 		return addressEntities
 				.stream()
 			   .map(AddressOfficeMapper::toAddressTO)
-			   .collect(Collectors.toSet());
+			   .collect(Collectors.toList());
 	}
 
-	public static Set<AddressOfficeEntity> map2Entities(Set<AddressTO> addressTOs) {
+	public static List<AddressOfficeEntity> map2Entities(List<AddressTO> addressTOs) {
 		return addressTOs
 				.stream()
 				.map(AddressOfficeMapper::toAddressEntity)
-				.collect(Collectors.toSet());
+				.collect(Collectors.toList());
 	}
 
 }

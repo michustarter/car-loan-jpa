@@ -7,17 +7,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.capgemini.dao.EmployeeDao;
+import com.capgemini.dao.OfficeDao;
 import com.capgemini.domain.EmployeeEntity;
 import com.capgemini.mappers.EmployeeMapper;
+import com.capgemini.mappers.OfficeMapper;
 import com.capgemini.service.EmployeeService;
 import com.capgemini.to.EmployeeTO;
+import com.capgemini.to.OfficeTO;
 
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
-	@Autowired
 	private EmployeeDao employeeDao;
+	private OfficeDao officeDao;
+	
+	@Autowired
+	public EmployeeServiceImpl(EmployeeDao employeeDao, OfficeDao officeDao) {
+		this.employeeDao=employeeDao;
+		this.officeDao=officeDao;
+	}
+	
+	
 
 	@Override
 	@Transactional(readOnly = false)
@@ -51,15 +62,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public EmployeeTO addOfficeToEmployee(Long employeeId, Long officeId) {
+	public EmployeeTO setOfficeToEmployee(EmployeeTO employee, OfficeTO office) {
 		
-		EmployeeTO wantedEmployee= findEmployeeById(employeeId);
-		EmployeeEntity employee=EmployeeMapper.toEmployeeEntity(wantedEmployee);
-		employeeDao.setOfficeToEmployee(employee.getId(), officeId);
+		if(employee.getId()==null) {
+			employeeDao.save(EmployeeMapper.toEmployeeEntity(employee));
+		}
+		if(office.getId()==null) {
+			officeDao.save(OfficeMapper.toOfficeEntity(office));
+		}
+		employee.setOffice(office);
+		employee=updateEmployeeData(employee);
 		
-		return EmployeeMapper.toEmployeeTO(employee);
+		return employee;
+		
 	}
-
 	@Override
 	public List<EmployeeTO> findOfficeEmployees(Long officeId) {
 		return EmployeeMapper.map2TOs(employeeDao.findOfficeEmployees(officeId));

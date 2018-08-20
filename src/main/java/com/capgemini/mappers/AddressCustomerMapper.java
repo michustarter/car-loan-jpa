@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.capgemini.domain.AddressCustomerEntity;
-import com.capgemini.domain.AddressOfficeEntity;
 import com.capgemini.to.AddressTO;
 import com.capgemini.to.AddressTO.AddressTOBuilder;
 

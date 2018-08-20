@@ -47,7 +47,5 @@ public class EmployeePositionEntity extends AbstractEntity implements Serializab
 	public void setPosition(String position) {
 		this.position = position;
 	}
-
-
 	
 }
